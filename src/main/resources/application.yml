@@ -11,7 +11,7 @@
 ## #### SpringCloud Gateway Primary configuration. ####
 #
 spring:
-  application.name: iscgw
+  application.name: gateway
   profiles:
     include: route
     active: dev

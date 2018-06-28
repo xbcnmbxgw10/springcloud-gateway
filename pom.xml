@@ -107,8 +107,8 @@
 		<graalvm.version>21.3.0</graalvm.version>
 		<spring-native.version>0.11.5</spring-native.version>
 		<native-maven-plugin.version>0.9.11</native-maven-plugin.version>
-		<bootstrap-classname>org.springcloud.gateway.Iscg</bootstrap-classname>
-		<final.name>iscgw</final.name>
+		<bootstrap-classname>org.springcloud.gateway.Gateway</bootstrap-classname>
+		<final.name>gateway</final.name>
 	</properties>
 	<repositories>
 		<repository>

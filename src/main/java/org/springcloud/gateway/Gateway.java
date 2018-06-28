@@ -19,10 +19,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Iscgw {
+public class Gateway {
 
     public static void main(String[] args) {
-        SpringApplication.run(Iscgw.class, args);
+        SpringApplication.run(Gateway.class, args);
     }
 
 }
