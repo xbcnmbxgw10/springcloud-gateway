@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springcloud.gateway.core.cli;
+package org.springcloud.gateway.core.kit;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintWriter;
@@ -23,8 +23,7 @@ import java.util.List;
 
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
-
-import org.springcloud.gateway.core.cli.annotation.PropertyDescription;
+import org.springcloud.gateway.core.kit.annotation.PropertyDescription;
 
 import static com.google.common.base.Charsets.UTF_8;
 import static org.springcloud.gateway.core.lang.Assert2.*;

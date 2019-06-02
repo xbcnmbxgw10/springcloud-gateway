@@ -13,51 +13,46 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springcloud.gateway.core.cli.ssh2;
+package org.springcloud.gateway.core.kit.ssh2;
 
-import com.google.common.annotations.Beta;
+import ch.ethz.ssh2.*;
+
+import org.springcloud.gateway.core.annotation.Stable;
 import org.springcloud.gateway.core.function.CallbackFunction;
 import org.springcloud.gateway.core.function.ProcessFunction;
 import org.springcloud.gateway.core.log.SmartLogger;
 
-import net.schmizz.sshj.SSHClient;
-import net.schmizz.sshj.connection.channel.direct.Session;
-import net.schmizz.sshj.connection.channel.direct.Session.Command;
-import net.schmizz.sshj.transport.verification.PromiscuousVerifier;
-import net.schmizz.sshj.userauth.keyprovider.KeyProvider;
-import net.schmizz.sshj.xfer.FileSystemFile;
-import net.schmizz.sshj.xfer.scp.SCPFileTransfer;
-import net.schmizz.sshj.xfer.scp.ScpCommandLine;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
-import static org.springcloud.gateway.core.cli.ssh2.SshjHolder.CommandSessionWrapper;
+import static ch.ethz.ssh2.ChannelCondition.CLOSED;
 import static org.springcloud.gateway.core.collection.CollectionUtils2.isEmptyArray;
 import static org.springcloud.gateway.core.io.ByteStreamUtils.readFullyToString;
-import static org.springcloud.gateway.core.lang.Assert2.hasText;
-import static org.springcloud.gateway.core.lang.Assert2.notNull;
+import static org.springcloud.gateway.core.lang.Assert2.*;
 import static org.springcloud.gateway.core.log.SmartLoggerFactory.getLogger;
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
-import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
 /**
- * SSHJ based SSH2 tools.
+ * Ethz based SSH2 tools.
  *
  * @author springcloudgateway <springcloudgateway@gmail.com>
  * @version v1.0.0
  * @since
  */
-@Beta
-public class SshjHolder extends SSH2Holders<CommandSessionWrapper, SCPFileTransfer> {
+@Stable
+public class EthzHolder extends SSH2Holders<Session, SCPClient> {
 
-    private static final SmartLogger log = getLogger(SshjHolder.class);
+    private static final SmartLogger log = getLogger(EthzHolder.class);
 
     // --- Transfer files. ---
 
     /**
-     * Transfer get file from remote host.(user sftp)
+     * Transfer get file from remote host.
      * 
      * @param host
      * @param user
@@ -76,7 +71,14 @@ public class SshjHolder extends SSH2Holders<CommandSessionWrapper, SCPFileTransf
         try {
             // Transfer get file.
             doScpTransfer(host, user, pemPrivateKey, password, scp -> {
-                scp.download(remoteFilePath, new FileSystemFile(localFile));
+                try (SCPInputStream sis = scp.get(remoteFilePath); FileOutputStream fos = new FileOutputStream(localFile);) {
+                    int i = 0;
+                    byte[] buf = new byte[DEFAULT_TRANSFER_BUFFER];
+                    while ((i = sis.read(buf)) != -1) {
+                        fos.write(buf, 0, i);
+                    }
+                    fos.flush();
+                }
             });
 
             log.debug("SCP get transfered: '{}' from '{}@{}:{}'", localFile.getAbsolutePath(), user, host, remoteFilePath);
@@ -106,8 +108,15 @@ public class SshjHolder extends SSH2Holders<CommandSessionWrapper, SCPFileTransf
         try {
             // Transfer send file.
             doScpTransfer(host, user, pemPrivateKey, password, scp -> {
-                // scp.upload(new FileSystemFile(localFile), remoteDir);
-                scp.newSCPUploadClient().copy(new FileSystemFile(localFile), remoteDir, ScpCommandLine.EscapeMode.NoEscape);
+                try (SCPOutputStream sos = scp.put(localFile.getName(), localFile.length(), remoteDir, "0744");
+                        FileInputStream fis = new FileInputStream(localFile);) {
+                    int i = 0;
+                    byte[] buf = new byte[DEFAULT_TRANSFER_BUFFER];
+                    while ((i = fis.read(buf)) != -1) {
+                        sos.write(buf, 0, i);
+                    }
+                    sos.flush();
+                }
             });
 
             log.debug("SCP put transfered: '{}' to '{}@{}:{}'", localFile.getAbsolutePath(), user, host, remoteDir);
@@ -129,7 +138,7 @@ public class SshjHolder extends SSH2Holders<CommandSessionWrapper, SCPFileTransf
      */
     @Override
     protected void doScpTransfer(String host, String user, char[] pemPrivateKey, String password,
-            CallbackFunction<SCPFileTransfer> processor) throws Exception {
+            CallbackFunction<SCPClient> processor) throws Exception {
         hasText(host, "Transfer host can't empty.");
         hasText(user, "Transfer user can't empty.");
         notNull(processor, "Transfer processor can't null.");
@@ -140,64 +149,53 @@ public class SshjHolder extends SSH2Holders<CommandSessionWrapper, SCPFileTransf
         }
         notNull(pemPrivateKey, "Transfer pemPrivateKey can't null.");
 
-        SSHClient ssh = null;
-        SCPFileTransfer scpFileTransfer = null;
+        Connection conn = null;
         try {
-            ssh = new SSHClient();
-            ssh.addHostKeyVerifier(new PromiscuousVerifier());
-            ssh.connect(host);
-            KeyProvider keyProvider = ssh.loadKeys(new String(pemPrivateKey), null, null);
-            ssh.authPublickey(user, keyProvider);
-
-            scpFileTransfer = ssh.newSCPFileTransfer();
-
             // Transfer file(put/get).
-            processor.process(scpFileTransfer);
+            processor.process(new SCPClient(conn = createSsh2Connection(host, user, pemPrivateKey, password)));
         } catch (Exception e) {
             throw e;
         } finally {
             try {
-                if (nonNull(ssh)) {
-                    ssh.disconnect();
-                    ssh.close();
-                }
+                if (nonNull(conn))
+                    conn.close();
             } catch (Exception e) {
                 log.error("", e);
             }
         }
+
     }
 
     // --- Execution commands. ---
 
+    @Override
     public Ssh2ExecResult execWaitForResponse(String host, String user, char[] pemPrivateKey, String password, String command,
             long timeoutMs) throws Exception {
-        return execWaitForComplete(host, user, pemPrivateKey, password, command, s -> {
-            Session.Command cmd = s.getCommand();
+        return execWaitForComplete(host, user, pemPrivateKey, password, command, session -> {
             String message = null, errmsg = null;
-            if (nonNull(cmd.getInputStream())) {
-                message = readFullyToString(cmd.getInputStream());
+            if (nonNull(session.getStdout())) {
+                message = readFullyToString(session.getStdout());
             }
-            if (nonNull(cmd.getErrorStream())) {
-                errmsg = readFullyToString(cmd.getErrorStream());
+            if (nonNull(session.getStderr())) {
+                errmsg = readFullyToString(session.getStderr());
             }
-            return new Ssh2ExecResult(nonNull(cmd.getExitSignal()) ? cmd.getExitSignal().toString() : null, cmd.getExitStatus(),
-                    message, errmsg);
+            return new Ssh2ExecResult(session.getExitSignal(), session.getExitStatus(), message, errmsg);
         }, timeoutMs);
     }
 
     @Override
     public <T> T execWaitForComplete(String host, String user, char[] pemPrivateKey, String password, String command,
-            ProcessFunction<CommandSessionWrapper, T> processor, long timeoutMs) throws Exception {
-        return doExecCommand(host, user, pemPrivateKey, password, command, s -> {
+            ProcessFunction<Session, T> processor, long timeoutMs) throws Exception {
+        return doExecCommand(host, user, pemPrivateKey, password, command, session -> {
             // Wait for completed by condition.
-            s.getCommand().join(timeoutMs, MILLISECONDS);
-            return processor.process(s);
+            session.waitForCondition((CLOSED), timeoutMs);
+            return processor.process(session);
         });
     }
 
     @Override
-    public <T> T doExecCommand(String host, String user, char[] pemPrivateKey, String password, String command,
-            ProcessFunction<CommandSessionWrapper, T> processor) throws Exception {
+    public final <T> T doExecCommand(String host, String user, char[] pemPrivateKey, String password, String command,
+            ProcessFunction<Session, T> processor) throws Exception {
         hasText(host, "SSH2 command host can't empty.");
         hasText(user, "SSH2 command user can't empty.");
         notNull(processor, "SSH2 command processor can't null.");
@@ -208,46 +206,67 @@ public class SshjHolder extends SSH2Holders<CommandSessionWrapper, SCPFileTransf
         }
         notNull(pemPrivateKey, "Transfer pemPrivateKey can't null.");
 
-        SSHClient ssh = null;
+        Connection conn = null;
         Session session = null;
-        Session.Command cmd = null;
         try {
-            ssh = new SSHClient();
-            ssh.addHostKeyVerifier(new PromiscuousVerifier());
-            ssh.connect(host);
-
-            if (!isEmptyArray(pemPrivateKey)) {
-                KeyProvider keyProvider = ssh.loadKeys(new String(pemPrivateKey), null, null);
-                ssh.authPublickey(user, keyProvider);
-            } else {
-                ssh.authPassword(user, password);
+            // Session & send command.
+            session = (conn = createSsh2Connection(host, user, pemPrivateKey, password)).openSession();
+            if (log.isInfoEnabled()) {
+                log.info("SSH2 sending command to {}@{}, ({})", user, host, command);
             }
-            session = ssh.startSession();
+            session.execCommand(command, "UTF-8");
 
-            // TODO
-            command = "source /etc/profile\nsource /etc/bashrc\n" + command;
-            cmd = session.exec(command);
-
-            return processor.process(new CommandSessionWrapper(session, cmd));
-        } catch (Exception e) {
+            // Customize process.
+            return processor.process(session);
+        } catch (IOException e) {
             throw e;
         } finally {
             try {
-                if (nonNull(session)) {
+                if (nonNull(session))
                     session.close();
-                }
-            } catch (Exception e) {
-                log.error("", e);
+            } catch (Exception e2) {
+                log.error("", e2);
             }
             try {
-                if (nonNull(ssh)) {
-                    ssh.disconnect();
-                    ssh.close();
-                }
-            } catch (Exception e) {
-                log.error("", e);
+                if (nonNull(conn))
+                    conn.close();
+            } catch (Exception e2) {
+                log.error("", e2);
             }
         }
+    }
+
+    /**
+     * create ssh2 connection.
+     * 
+     * @param host
+     * @param user
+     * @param pemPrivateKey
+     * @return
+     * @throws IOException
+     */
+    private final Connection createSsh2Connection(String host, String user, char[] pemPrivateKey, String password)
+            throws IOException {
+        hasText(host, "SSH2 command host can't empty.");
+        hasText(user, "SSH2 command user can't empty.");
+        // notNull(pemPrivateKey, "SSH2 command pemPrivateKey must not be
+        // null.");
+        isTrueOf(!isEmptyArray(pemPrivateKey) || StringUtils.isNotBlank(password), "pemPrivateKey");
+
+        Connection conn = new Connection(host);
+        conn.connect();
+
+        if (!isEmptyArray(pemPrivateKey)) {
+            // Authentication with pub-key.
+            isTrue(conn.authenticateWithPublicKey(user, pemPrivateKey, null), String
+                    .format("Failed to SSH2 authenticate with %s@%s privateKey(%s)", user, host, new String(pemPrivateKey)));
+        } else {
+            isTrue(conn.authenticateWithPassword(user, password),
+                    String.format("Failed to SSH2 authenticate with %s@%s password(%s)", user, host, password));
+        }
+
+        log.debug("SSH2 connected to {}@{}", user, host);
+        return conn;
     }
 
     // --- Tool function's. ---
@@ -255,33 +274,6 @@ public class SshjHolder extends SSH2Holders<CommandSessionWrapper, SCPFileTransf
     @Override
     public Ssh2KeyPair generateKeypair(AlgorithmType type, String comment) throws Exception {
         throw new UnsupportedOperationException();
-    }
-
-    /**
-     * {@link CommandSessionWrapper}
-     *
-     * @author springcloudgateway <springcloudgateway@gmail.com>
-     * @version v1.0.0
-     * @since
-     */
-    public static class CommandSessionWrapper {
-        private final Session session;
-        private final Session.Command command;
-
-        public CommandSessionWrapper(Session session, Command command) {
-            super();
-            this.session = session;
-            this.command = command;
-        }
-
-        public Session getSession() {
-            return session;
-        }
-
-        public Session.Command getCommand() {
-            return command;
-        }
-
     }
 
 }

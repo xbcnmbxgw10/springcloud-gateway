@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springcloud.gateway.core.cli;
+package org.springcloud.gateway.core.kit;
 
 import static org.springcloud.gateway.core.collection.CollectionUtils2.safeArrayToList;
 import static org.springcloud.gateway.core.lang.Assert2.hasTextOf;

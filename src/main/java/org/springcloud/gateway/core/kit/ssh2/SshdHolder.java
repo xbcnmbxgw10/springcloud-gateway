@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springcloud.gateway.core.cli.ssh2;
+package org.springcloud.gateway.core.kit.ssh2;
 
 import static org.springcloud.gateway.core.lang.Assert2.hasText;
 import static org.springcloud.gateway.core.lang.Assert2.notNull;

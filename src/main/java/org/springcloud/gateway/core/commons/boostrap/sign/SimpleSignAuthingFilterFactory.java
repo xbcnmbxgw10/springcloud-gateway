@@ -61,7 +61,6 @@ import com.google.common.cache.Cache;
 import com.google.common.hash.Funnel;
 import com.google.common.hash.Hashing;
 
-import org.springcloud.gateway.core.actualtion.JvmRuntimeTool;
 import org.springcloud.gateway.core.commons.boostrap.config.IamSecurityProperties;
 import org.springcloud.gateway.core.commons.boostrap.config.IamSecurityProperties.SecretStore;
 import org.springcloud.gateway.core.commons.bootstrap.sign.event.SignAuthingFailureEvent;
@@ -75,6 +74,7 @@ import org.springcloud.gateway.core.commons.microtag.GatewayMetricsFacade.Metric
 import org.springcloud.gateway.core.commons.microtag.GatewayMetricsFacade.MetricsTag;
 import org.springcloud.gateway.core.eventbus.EventBusSupport;
 import org.springcloud.gateway.core.log.SmartLogger;
+import org.springcloud.gateway.core.tools.JvmRuntimeTool;
 import org.springcloud.gateway.core.web.rest.RespBase;
 
 import lombok.AllArgsConstructor;
