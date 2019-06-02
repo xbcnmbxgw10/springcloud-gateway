@@ -17,7 +17,6 @@ package org.springcloud.gateway.core.modelseri;
 
 import com.google.common.base.Charsets;
 import com.google.common.collect.Maps;
-import org.springcloud.gateway.core.reflect.ObjectInstantiators;
 
 import io.protostuff.LinkedBuffer;
 import io.protostuff.ProtostuffIOUtil;
@@ -38,6 +37,8 @@ import java.util.Stack;
 import java.util.TreeMap;
 import java.util.Vector;
 import java.util.concurrent.CopyOnWriteArrayList;
+
+import org.springcloud.gateway.core.core.ObjectInstantiators;
 
 /**
  * Google Protostuff serialize utils

@@ -16,7 +16,6 @@
 package org.springcloud.gateway.core.crypto.symmetric;
 
 import static com.google.common.base.Charsets.UTF_8;
-import static org.springcloud.gateway.core.actualtion.JvmRuntimeTool.*;
 import static org.springcloud.gateway.core.lang.Assert2.hasText;
 import static org.springcloud.gateway.core.lang.Assert2.hasTextOf;
 import static org.springcloud.gateway.core.lang.Assert2.notNull;
@@ -24,6 +23,7 @@ import static org.springcloud.gateway.core.lang.Assert2.notNullOf;
 import static org.springcloud.gateway.core.lang.Assert2.isTrue;
 import static org.springcloud.gateway.core.log.SmartLoggerFactory.getLogger;
 import static org.springcloud.gateway.core.modelseri.JacksonUtils.toJSONString;
+import static org.springcloud.gateway.core.tools.JvmRuntimeTool.*;
 import static java.lang.String.format;
 import static java.lang.String.valueOf;
 import static java.lang.System.arraycopy;

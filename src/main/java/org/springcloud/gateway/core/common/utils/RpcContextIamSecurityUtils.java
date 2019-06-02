@@ -19,9 +19,9 @@
  */
 package org.springcloud.gateway.core.common.utils;
 
-import static org.springcloud.gateway.core.common.constant.ServiceIAMConstants.KEY_IAM_RPC_PRINCIPAL;
-import static org.springcloud.gateway.core.common.constant.ServiceIAMConstants.KEY_IAM_RPC_PRINCIPAL_ID;
-import static org.springcloud.gateway.core.common.constant.ServiceIAMConstants.KEY_IAM_RPC_PRINCIPAL_USER;
+import static org.springcloud.gateway.core.common.constant.ServiceMAIConstants.KEY_IAM_RPC_PRINCIPAL;
+import static org.springcloud.gateway.core.common.constant.ServiceMAIConstants.KEY_IAM_RPC_PRINCIPAL_ID;
+import static org.springcloud.gateway.core.common.constant.ServiceMAIConstants.KEY_IAM_RPC_PRINCIPAL_USER;
 import static org.springcloud.gateway.core.bridge.RpcContextHolderBridges.hasRpcContextHolderClass;
 import static org.springcloud.gateway.core.bridge.RpcContextHolderBridges.invokeGet;
 import static org.springcloud.gateway.core.bridge.RpcContextHolderBridges.invokeGetRef;

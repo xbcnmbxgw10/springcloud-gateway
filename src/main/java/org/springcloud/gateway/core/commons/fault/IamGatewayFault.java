@@ -66,6 +66,12 @@ public abstract class IamGatewayFault {
      * </p>
      */
     public static abstract class SafeFilterOrdered extends BaseConstants {
+        
+        /**
+         * Depends: traceId, principal(optional, The dyeing print according to
+         * principal log)
+         */
+        public static final int ORDER_LOGGING = getIntegerProperty("ISCG_ORDER_LOGGING", -110);
 
         public static final int ORDER_IPFILTER = getIntegerProperty("ISCG_ORDER_IPFILTER", -100);
 
@@ -76,12 +82,6 @@ public abstract class IamGatewayFault {
         public static final int ORDER_SIMPLE_SIGN = getIntegerProperty("ISCG_ORDER_SIMPLE_SIGN", -70);
 
         public static final int ORDER_TRACE = getIntegerProperty("ISCG_ORDER_TRACE", -60);
-
-        /**
-         * Depends: traceId, principal(optional, The dyeing print according to
-         * principal log)
-         */
-        public static final int ORDER_LOGGING = getIntegerProperty("ISCG_ORDER_LOGGING", -50);
 
         /**
          * Depends: principal(request limit by principal)

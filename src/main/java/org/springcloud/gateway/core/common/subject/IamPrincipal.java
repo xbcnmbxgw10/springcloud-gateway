@@ -15,14 +15,14 @@
  */
 package org.springcloud.gateway.core.common.subject;
 
-import static org.springcloud.gateway.core.common.constant.FastCasIAMConstants.KEY_ACCESSTOKEN_SIGN_NAME;
-import static org.springcloud.gateway.core.common.constant.FastCasIAMConstants.KEY_AUTHC_HOST_NAME;
-import static org.springcloud.gateway.core.common.constant.FastCasIAMConstants.KEY_DATA_CIPHER_NAME;
-import static org.springcloud.gateway.core.common.constant.FastCasIAMConstants.KEY_LANG_NAME;
-import static org.springcloud.gateway.core.common.constant.FastCasIAMConstants.KEY_PARENT_SESSIONID_NAME;
-import static org.springcloud.gateway.core.common.constant.FastCasIAMConstants.KEY_REMEMBERME_NAME;
-import static org.springcloud.gateway.core.common.constant.FastCasIAMConstants.KEY_SNS_AUTHORIZED_INFO;
-import static org.springcloud.gateway.core.common.constant.IAMConstants.KEY_IAM_SUBJECT_USER;
+import static org.springcloud.gateway.core.common.constant.FastMAIConstants.KEY_ACCESSTOKEN_SIGN_NAME;
+import static org.springcloud.gateway.core.common.constant.FastMAIConstants.KEY_AUTHC_HOST_NAME;
+import static org.springcloud.gateway.core.common.constant.FastMAIConstants.KEY_DATA_CIPHER_NAME;
+import static org.springcloud.gateway.core.common.constant.FastMAIConstants.KEY_LANG_NAME;
+import static org.springcloud.gateway.core.common.constant.FastMAIConstants.KEY_PARENT_SESSIONID_NAME;
+import static org.springcloud.gateway.core.common.constant.FastMAIConstants.KEY_REMEMBERME_NAME;
+import static org.springcloud.gateway.core.common.constant.FastMAIConstants.KEY_SNS_AUTHORIZED_INFO;
+import static org.springcloud.gateway.core.common.constant.SCGBaseConstants.KEY_IAM_SUBJECT_USER;
 import static org.springcloud.gateway.core.lang.Assert2.hasTextOf;
 import static org.springcloud.gateway.core.lang.Assert2.notNullOf;
 import static org.springcloud.gateway.core.modelseri.JacksonUtils.parseJSON;

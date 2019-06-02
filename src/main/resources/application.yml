@@ -1,5 +1,5 @@
-# Copyright (c) 2017 ~ 2025, the original author springcloudgateway individual Inc,
-# All rights reserved. Contact us<springcloudgateway@163.com>
+# Copyright (c) 2017 ~ 2025, the original author James Gsoing individual Inc,
+# All rights reserved. Contact us <springcloudgateway@gmail.com, >
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -12,44 +12,34 @@
 #
 spring:
   application.name: gateway
-  profiles:
-    include: route
-    active: dev
-  banner:
-      location: classpath:META-INF/banner.txt
-  freemarker:
-    checkTemplateLocation: false
   main:
     allow-circular-references: true
     allow-bean-definition-overriding: true
-  ## see:https://reflectoring.io/spring-boot-tracing/
-  ## The entry of bind attrs to reactor context see:org.springframework.cloud.sleuth.instrument.reactor.ReactorSleuth#runMonoSupplierInScope()
+  profiles:
+<<<<<<< HEAD
+    include: example-route
+=======
+    include: example-route,example-discovery
+>>>>>>> 6ddba0b... FIX: optimization and suchs configurations
+    active: dev
+  freemarker:
+    checkTemplateLocation: false
   sleuth:
     enabled: true
-    ## see:org.springframework.cloud.sleuth.autoconfig.instrument.web.TraceWebFluxConfiguration
-    ## see:org.springframework.cloud.sleuth.autoconfig.instrument.web.SleuthWebProperties
     web:
-      ## [Note]: In order to use canary tracking instead of the original TraceWebFilter, that must be turned off.
-      ## see:org.springcloud.gateway.core.commons.trace.config.GrayTraceAutoConfiguration#canaryTraceWebFilter()
       enabled: false
       #skipPattern:
       #filterOrder:
       #ignoreAutoConfiguredSkipPatterns: false
-    ### see:org.springframework.cloud.sleuth.autoconfig.brave.SleuthProperties
     #traceId128: false
     #supportsJoin: false
-    ### see:org.springframework.cloud.sleuth.autoconfig.SleuthOpentracingProperties
     #opentracing:
     #  enabled: true
-    ### see:org.springframework.cloud.sleuth.autoconfig.brave.ConditionalOnBraveEnabled
-    ### see:org.springframework.cloud.sleuth.autoconfig.SleuthTracerProperties
     #tracer:
     #  mode: AUTO
-    ### see:org.springframework.cloud.sleuth.autoconfig.brave.SamplerProperties
     #sampler:
     #  probability: 
     #  rate: 10
-    ### see:org.springframework.cloud.sleuth.autoconfig.brave.instrument.grpc.BraveGrpcAutoConfiguration
     #grpc:
     #  enabled: true
     #zipkin:
@@ -108,9 +98,6 @@ spring:
         sleuthBaggage.enabled: true
         ## see:org.springframework.cloud.sleuth.autoconfig.otel.OtelPropagationConfiguration.PropagatorsConfiguration
         compositeTextMapPropagator.enabled: true
-      ## see:org.springframework.cloud.sleuth.autoconfig.otel.OtelLogConfiguration
-      ## see:org.springframework.cloud.sleuth.autoconfig.otel.OtelLogProperties
-      ## The scope fields into MDC see:org.springframework.cloud.sleuth.otel.bridge.Slf4jBaggageApplicationListener#onScopeAttached()
       log:
         exporter.enabled: true ## Default by false
         slf4j.enabled: true ## Default by false
@@ -134,32 +121,16 @@ spring:
         jaeger:
           endpoint: http://localhost:14250
           timeout: 10000
-  ## Solve the problem of 'DataBufferLimitException: Exceeded limit on max bytes to buffer : 262144',
-  ## but the lower version is invalid.
-  ## see:https://github.com/spring-cloud/spring-cloud-gateway/issues/1924
-  ## see:https://github.com/spring-cloud/spring-cloud-gateway/issues/1793
-  ## see:https://github.com/spring-cloud/spring-cloud-gateway/issues/1596
   #codec.max-in-memory-size: 102400000
   cloud:
     ## see:https://github.com/spring-cloud/spring-cloud-gateway/issues/1370
     circuitbreaker:
-      ## see:https://cloud.spring.io/spring-cloud-circuitbreaker/reference/html/spring-cloud-circuitbreaker.html
-      ## see:org.springframework.cloud.circuitbreaker.resilience4j.Resilience4JAutoConfiguration
       resilience4j:
         enabled: true
     loadbalancer:
       use404: false ## Default by false
-    ## see:org.springframework.cloud.gateway.config.GatewayAutoConfiguration
-    ## see:org.springframework.cloud.gateway.config.GatewayProperties
-    ## see:org.springframework.cloud.gateway.handler.FilteringWebHandler#handle()
-    ## see:https://cloud.spring.io/spring-cloud-static/spring-cloud-gateway/2.0.0.RELEASE/single/spring-cloud-gateway.html#_requestratelimiter_gatewayfilter_factory
-    ## see:https://github.com/eugenp/tutorials/blob/master/spring-cloud/spring-cloud-gateway/src/main/resources/application-webfilters.yml
-    ## see:https://docs.spring.io/spring-cloud-gateway/docs/current/reference/html/appendix.html
     gateway:
       x-forwarded: ## see:org.springframework.cloud.gateway.filter.headers.XForwardedHeadersFilter
-        ## [Note]: Note: If the fallbackURI must not be set to '/', otherwise when the circuit breaker is enabled, since the addition of the
-        ## 'x-forward' and 'forwarded' headers is enabled by default, when all backend service instances are unreachable, a large number of 
-        ## repetitions will be added header, the client eventually responds with a 413 error.
         enabled: true ## Default by true
         forEnabled: true ## Add for X-Forwarded-For, Default by true
         hostEnabled: true ## true ## Add for X-Forwarded-Host, Default by true
@@ -171,7 +142,6 @@ spring:
         portAppend: true ## Add for X-Forwarded-Port list, Default by true
         protoAppend: true ## Add for X-Forwarded-Proto list, Default by true
         prefixAppend: true ## Add for X-Forwarded-Prefix list, Default by true
-      ## see:org.springframework.cloud.gateway.config.GlobalCorsProperties
       #globalcors:
       #  cors-configurations: ## Default no set.
       fail-on-route-definition-error: true ## Default by true
@@ -186,22 +156,18 @@ spring:
           permitted-cross-domain-policies: none ## Default by 'none'
           frame-options: DENY ## Default by 'DENY'
           download-options: noopen ## Default by 'noopen'
-        ## !!! [Deprecated]: use 'spring.iam.gateway.ratelimit' !!!
-        ## The default request ratelimiter configuragion.
-        ## see:org.springframework.cloud.gateway.filter.factory.RequestRateLimiterGatewayFilterFactory#apply()
         ##request-rate-limiter:
         ##  denyEmptyKey: true
         ##  emptyKeyStatusCode: UNPROCESSABLE_ENTITY
-      ## !!! [Deprecated]: use 'spring.iam.gateway.ratelimit' !!!
       ## The default based redis ratelimiter configuragion.
       ## see:org.springframework.cloud.gateway.config.GatewayRedisAutoConfiguration#redisRateLimiter
       ## see:org.springframework.cloud.gateway.filter.ratelimit.RedisRateLimiter
       ##redis-rate-limiter:
       ##  include-headers: false ## Default by true
-      ##  burst-capacity-header: X-Iscg-RateLimit-Burst-Capacity ## Default by 'X-RateLimit-Burst-Capacity'
-      ##  remaining-header: X-Iscg-RateLimit-Remaining ## Default by 'X-RateLimit-Remaining'
-      ##  replenish-rate-header: X-Iscg-RateLimit-Replenish-Rate ## Default by 'X-RateLimit-Replenish-Rate'
-      ##  requested-tokens-header: X-Iscg-RateLimit-Requested-Tokens ## Default by 'X-RateLimit-Requested-Tokens'
+      ##  burst-capacity-header: X-GW-RateLimit-Burst-Capacity ## Default by 'X-RateLimit-Burst-Capacity'
+      ##  remaining-header: X-GW-RateLimit-Remaining ## Default by 'X-RateLimit-Remaining'
+      ##  replenish-rate-header: X-GW-RateLimit-Replenish-Rate ## Default by 'X-RateLimit-Replenish-Rate'
+      ##  requested-tokens-header: X-GW-RateLimit-Requested-Tokens ## Default by 'X-RateLimit-Requested-Tokens'
       httpserver:
         wiretap: false ## Default by false
       httpclient: ## see:org.springframework.cloud.gateway.config.HttpClientProperties
@@ -212,12 +178,6 @@ spring:
         responseTimeout: 60_000 ## Default by 60s
         maxHeaderSize: 65535 ## Default no set.
         #maxInitialLineLength: ## Default by null
-        #proxy:
-        # host:
-        # port:
-        # username:
-        # password:
-        # non-proxy-hosts-pattern:
         pool:
           name: proxy ## Default by proxy
           #metrics: true ## Default by false
@@ -239,12 +199,9 @@ spring:
           #key-store-provider:
           #trusted-x509-certificates:
           #use-insecure-trust-manager: true ## Default by false
-      ## see:org.springframework.cloud.gateway.config.GatewayMetricsAutoConfiguration
-      ## see:org.springframework.boot.actuate.metrics.web.reactive.server.MetricsWebFilter
-      ## see:org.springframework.cloud.gateway.filter.GatewayMetricsFilter
       metrics:
         enabled: true ## Default no-set.
-        prefix: iam_gateway ## Default by 'spring.cloud.gateway'
+        prefix: gateway ## Default by 'spring.cloud.gateway'
         tags:
           application: ${spring.application.name}
           profiles.include: ${spring.profiles.include}
@@ -252,20 +209,9 @@ spring:
       actuator:
         verbose:
           enabled: true ## Default by false
-
-  ## ######################
-  ## Infra configuration.
-  ## ######################
   infra:
-    ## Note: That disable generic logging for the infrastructure and enable special logging for the gateway.
-    ## currently, the two implementations are almost identical, but in the future the gateway's logging
-    ## may add special functionality.
     core.logging.enabled: false
-
-  ## ######################
-  ## SpringCloud gateway configuration.
-  ## ######################
-  iam:
+  scg:
     gateway:
       server:
         ssl-verifier:
@@ -313,7 +259,7 @@ spring:
             #path: ## Ant path pattern.
             header:
               symbol: IGNORECASE_EQ ## Options(eq|prefix|suffix|include|ignorecase_eq|ignorecase_prefix|ignorecase_suffix|ignorecase_include)
-              key: X-Iscg-Fault
+              key: X-GW-Fault
               value: y
             #cookie:
             #  symbol:
@@ -324,7 +270,7 @@ spring:
             #  key:
             #  value:
         ## The name of the header that returns the fault injected configuration.
-        faultInjectedHeader: X-Iscg-Fault-Injected
+        faultInjectedHeader: X-GW-Fault-Injected
         defaultInject:
           ## The enabled fault injector providers.
           provider: Abort ## Default by Abort, Optional(Abort|FixedDelay|RangeDelay)
@@ -351,7 +297,7 @@ spring:
       security:
         simpleSign:
           secretStore: redis
-          secretStorePrefix: iam:gateway:auth:sign:secret
+          secretStorePrefix: gateway:auth:sign:secret
           secretLocalCacheSeconds: 6 ## Default by 6sec
           ## Ignore authentication in JVM debug mode, often used for rapid development and testing environments.
           ## [NOTICE]: that this switch is only for dev testing and definitely not for production, known issue:
@@ -359,7 +305,7 @@ spring:
           ## 'principalNameKeyResolver' is used (The default is 403 or 422), the reason is because the current
           ## authenticated principal name cannot be obtained.
           anonymousAuthingWithJvmDebug: false ## Default by false
-          signReplayVerifyBloomLoadPrefix: iam:gateway:auth:sign:replay:bloom
+          signReplayVerifyBloomLoadPrefix: gateway:auth:sign:replay:bloom
           eventRecorder:
             publishEventBusThreads: 1 ## Default by 1
             ## Based on whether the redis event logger enables logging, if it is turned on, it can be used as a downgrade
@@ -368,9 +314,9 @@ spring:
             redis:
               enabled: true ## Default by true
               ## Redis event recorder success accumulator prefix.
-              successCumulatorPrefix: iam:gateway:auth:sign:event:success
+              successCumulatorPrefix: gateway:auth:sign:event:success
               ## Redis event recorder failure accumulator prefix.
-              failureCumulatorPrefix: iam:gateway:auth:sign:event:failure
+              failureCumulatorPrefix: gateway:auth:sign:event:failure
               ## Redis event recorder accumulator suffix of date format pattern.
               cumulatorSuffixOfDatePattern: yyMMdd
       trace:
@@ -387,7 +333,7 @@ spring:
             #path: ## Ant path pattern.
             header:
               symbol: IGNORECASE_EQ ## Options(eq|prefix|suffix|include|ignorecase_eq|ignorecase_prefix|ignorecase_suffix|ignorecase_include)
-              key: X-Iscg-Trace
+              key: X-GW-Trace
               value: y
             #cookie:
             #  symbol:
@@ -446,9 +392,9 @@ spring:
         ## The output default level of flight log printing, similar to kubectl design value range: 1-10, 1 is coarse-grained log, 10 is the most fine-grained log.
         defaultVerboseLevel: 10
         ## The request header name used to set the log output verbose level valid only for the current request, This value takes precedence over '#defaultVerboseLevel'
-        verboseLevelRequestHeader: X-Iscg-Log-Level ## Default by 'X-Iscg-Log-Level'
+        verboseLevelRequestHeader: X-GW-Log-Level ## Default by 'X-GW-Log-Level'
         ## Sets the status header name of the dyed log request, which is used to notify the back-end services to enable log printing for the current request.
-        setDyeingLogStateRequestHeader: X-Iscg-Log-Dyeing-State ## Default by 'X-Iscg-Log-Dyeing-State'
+        setDyeingLogStateRequestHeader: X-GW-Log-Dyeing-State ## Default by 'X-GW-Log-Dyeing-State'
         ## In order to prevent the request body data from being too large, only the
         ## first small part of the body data is obtained.
         maxPrintRequestBodyLength: 1024 ## Default by 1024
@@ -457,7 +403,7 @@ spring:
         maxPrintResponseBodyLength: 1024 ## Default by 1024
         ## Prefer to enable print logs match SPEL match expression. Default by '#{true}', which means never match.
         ## Tip: The built-in support to get the current routeId, such as: #{routeId.get().test('my-service-route')}
-        preferOpenMatchExpression: '#{$defaultLogHeader.or($defaultLogQuery).or($energyOpenApiLogWithPath).test($request)}'
+        preferOpenMatchExpression: '#{$defaultLogHeader.or($defaultLogQuery).test($request)}'
         ## Prefer to enable print logs match rules definition.
         preferMatchRuleDefinitions:
           - name: defaultLogHeader
@@ -468,7 +414,7 @@ spring:
             #path: ## Ant path pattern.
             header:
               symbol: IGNORECASE_EQ ## Options(eq|prefix|suffix|include|ignorecase_eq|ignorecase_prefix|ignorecase_suffix|ignorecase_include)
-              key: X-Iscg-Log
+              key: X-GW-Log
               value: y
             #cookie:
             #  symbol:
@@ -481,10 +427,8 @@ spring:
           - name: defaultLogQuery
             query:
               symbol: IGNORECASE_EQ
-              key: __iscg_log
+              key: __gw_log
               value: y
-          - name: energyOpenApiLogWithPath
-            path: '/openapi/**'
       requestlimit:
         ## The get denial of Service when throttling key is empty.
         denyEmptyKey: true ## Default by true
@@ -508,21 +452,21 @@ spring:
         limiter:
           rate:
             ## The rate limiter user-level configuration key prefix.
-            configPrefix: iam:gateway:requestlimit:config:rate
+            configPrefix: gateway:requestlimit:config:rate
             ## The rate limiter user-level tokens computational key prefix.
-            tokenPrefix: iam:gateway:requestlimit:token:rate
+            tokenPrefix: gateway:requestlimit:token:rate
             ## The name of the deny header that empty key got obtained.
-            denyEmptyKeyHeader: X-Iscg-RateLimit-Deny-EmptyKey ## Default by 'X-Iscg-RateLimit-Deny-EmptyKey'
+            denyEmptyKeyHeader: X-GW-RateLimit-Deny-EmptyKey ## Default by 'X-GW-RateLimit-Deny-EmptyKey'
             ## The name of the header that returns the burst capacity configuration.
-            burstCapacityHeader: X-Iscg-RateLimit-Burst-Capacity ## Default by 'X-RateLimit-Burst-Capacity'
+            burstCapacityHeader: X-GW-RateLimit-Burst-Capacity ## Default by 'X-RateLimit-Burst-Capacity'
             ## The name of the header that returns the replenish rate configuration.
-            replenishRateHeader: X-Iscg-RateLimit-Replenish-Rate ## Default by 'X-RateLimit-Replenish-Rate'
+            replenishRateHeader: X-GW-RateLimit-Replenish-Rate ## Default by 'X-RateLimit-Replenish-Rate'
             ## The name of the header that returns the requested tokens configuration.
-            requestedTokensHeader: X-Iscg-RateLimit-Requested-Tokens ## Default by 'X-RateLimit-Requested-Tokens'
+            requestedTokensHeader: X-GW-RateLimit-Requested-Tokens ## Default by 'X-RateLimit-Requested-Tokens'
             ## The name of the header that returns number of remaining requests during the current second.
-            remainingHeader: X-Iscg-RateLimit-Remaining ## Default by 'X-RateLimit-Remaining'
+            remainingHeader: X-GW-RateLimit-Remaining ## Default by 'X-RateLimit-Remaining'
             ## The name of the header that returns number of limited key the current request.
-            limitKeyHeader: X-Iscg-RateLimit-LimitKey ## Default by 'X-Iscg-RateLimit-LimitKey'
+            limitKeyHeader: X-GW-RateLimit-LimitKey ## Default by 'X-GW-RateLimit-LimitKey'
             ## The default strategy configuration of request limiter based on redis rate.
             defaultStrategy:
               ## The add the properties info of the current limiter to the response header.
@@ -535,19 +479,19 @@ spring:
               requestedTokens: 1 ## Default by 1
           quota:
             ## The quota limiter user-level configuration key prefix.
-            configPrefix: iam:gateway:requestlimit:config:quota
+            configPrefix: gateway:requestlimit:config:quota
             ## The quota limiter user-level tokens computational key prefix.
-            tokenPrefix: iam:gateway:requestlimit:token:quota
+            tokenPrefix: gateway:requestlimit:token:quota
             ## The name of the deny header that empty key got obtained.
-            denyEmptyKeyHeader: X-Iscg-QuotaLimit-Deny-EmptyKey ## Default by 'X-Iscg-QuotaLimit-Deny-EmptyKey'
+            denyEmptyKeyHeader: X-GW-QuotaLimit-Deny-EmptyKey ## Default by 'X-GW-QuotaLimit-Deny-EmptyKey'
             ## The name of the header that returns the request capacity configuration.
-            requestCapacityHeader: X-Iscg-QuotaLimit-Request-Capacity ## Default by 'X-QuotaLimit-Request-Capacity'
+            requestCapacityHeader: X-GW-QuotaLimit-Request-Capacity ## Default by 'X-QuotaLimit-Request-Capacity'
             ## The name of the header that returns number of remaining requests during the current second.
-            remainingHeader: X-Iscg-QuotaLimit-Remaining ## Default by 'X-QuotaLimit-Remaining'
+            remainingHeader: X-GW-QuotaLimit-Remaining ## Default by 'X-QuotaLimit-Remaining'
             ## The name of the header that returns the time cycle pattern of the request limiting.
-            cyclePatternHeader: X-Iscg-QuotaLimit-Cycle ## Default by 'X-Iscg-QuotaLimit-Cycle'
+            cyclePatternHeader: X-GW-QuotaLimit-Cycle ## Default by 'X-GW-QuotaLimit-Cycle'
             ## The name of the header that returns number of limited key the current request.
-            limitKeyHeader: X-Iscg-QuotaLimit-LimitKey ## Default by 'X-Iscg-QuotaLimit-LimitKey'
+            limitKeyHeader: X-GW-QuotaLimit-LimitKey ## Default by 'X-GW-QuotaLimit-LimitKey'
             ## The default strategy configuration of request limiter based on redis quota.
             defaultStrategy:
               ## The add the properties info of the current limiter to the response header.
@@ -563,9 +507,9 @@ spring:
           localLogEnabled: true ## Default by true
           redis:
             ## Event logging key prefix for redis based rate limiter.
-            rateHitsCumulatorPrefix: iam:gateway:requestlimit:event:hits:rate
+            rateHitsCumulatorPrefix: gateway:requestlimit:event:hits:rate
             ## Event logging key prefix for redis based quota limiter.
-            quotaHitsCumulatorPrefix: iam:gateway:requestlimit:event:hits:quota
+            quotaHitsCumulatorPrefix: gateway:requestlimit:event:hits:quota
             ## Redis event recorder accumulator suffix of date format pattern.
             cumulatorSuffixOfDatePattern: yyMMdd ## Default by 'yyMMdd'
       traffic:
@@ -599,16 +543,9 @@ spring:
             handshake-timeout: 10000ms ## Default by 10000ms
             close-notify-flush-timeout: 3000ms ## Default by 3000ms
             close-notify-read-timeout: 0 ## Default by 0
-            #key-password: ${spring.cloud.gateway.httpclient.ssl.key-store-password}
-            #key-store: ## Keystore path for Netty HttpClient.
-            #key-store-type:
-            #key-store-password:
-            #key-store-provider:
-            #trusted-x509-certificates:
-            #use-insecure-trust-manager: true ## Default by false
       responsecache:
         ## The name of the header that returns the request cached configuration.
-        responseCachedHeader: X-Iscg-Cached ## Default by 'X-Iscg-Cached'
+        responseCachedHeader: X-GW-Cached ## Default by 'X-GW-Cached'
         ## The initial capacity of the temporary buffer size.
         tmpBufferInitialCapacity: 1024 ## Default by 1024
         ## The maximum capacity of the temporary buffer size.
@@ -619,29 +556,13 @@ spring:
         ## Prefer to enable tracing samples match rule definitions.
         preferMatchRuleDefinitions:
           - name: defaultCacheHeader
-            #method:
-            #schema:
-            #host:
-            #port:
-            #path: ## Ant path pattern.
             header:
               symbol: IGNORECASE_EQ ## Options(eq|prefix|suffix|include|ignorecase_eq|ignorecase_prefix|ignorecase_suffix|ignorecase_include)
-              key: X-Iscg-Cache
+              key: X-GW-Cache
               value: y
-            #cookie:
-            #  symbol:
-            #  key:
-            #  value:
-            #query:
-            #  symbol:
-            #  key:
-            #  value:
         defaultCache:
           provider: SimpleCache ## Default by SimpleCache, options(SimpleCache|EhCache|RedisCache)
           simple:
-            ## If you wish the cache should not exceed this number of entries, the cache will evict recently or infrequently
-            ## used entries when it does, WARNING: the cache may evict entries before this limit is exceeded - usually
-            ## when the cache size is close to the limit.
             maximumSize: 100_000 ## Default by 100_000
             ## The expiration interval based on write time, all cache entry reads and writes are updated.
             expireAfterAccessMs: 60_000 ## Default by 60_000
@@ -661,9 +582,8 @@ spring:
             ## The number of total data size not persisted to keep in disk. must be greater than offHeapSize
             diskSize: 512MB ## Default by 512MB
           redis:
-            cachePrefix: iam:gateway:responsecache:data
+            cachePrefix: gateway:responsecache:data
             expireMs: 60_000
-      ## see:https://github.com/spring-cloud/spring-cloud-gateway/issues/1370
       circuitbreaker:
         failureRateThreshold: 40 ## Default by 50
         permittedNumberOfCallsInHalfOpenState: 10 ## Default by 10
@@ -680,7 +600,7 @@ spring:
           cancelRunningFuture: true ## Default by true
       loadbalancer:
         enabled: true ## Default by true
-        canaryDiscoveryServiceLabelPrefix: Iscg-Canary-Label ## Default by 'Iscg-Canary-Label'
+        canaryDiscoveryServiceLabelPrefix: GW-Canary-Label ## Default by 'GW-Canary-Label'
         # TODO
         #canaryChooseExpression: '#{$rule.and($defaultZoneHeader).test($request)}'
         ## The SPEL expressions that match canary requests.
@@ -690,7 +610,7 @@ spring:
           #- name: defaultZoneHeader
           #  query:
           #    symbol: IGNORECASE_EQ
-          #    key: X-Iscg-Zone
+          #    key: X-GW-Zone
           #    value: cn_south1_a1
           - name: v1-canary-header
             #method:
@@ -700,7 +620,7 @@ spring:
             #path: ## Ant path pattern.
             header:
               symbol: IGNORECASE_EQ ## Options(eq|prefix|suffix|include|ignorecase_eq|ignorecase_prefix|ignorecase_suffix|ignorecase_include)
-              key: X-Iscg-Canary
+              key: X-GW-Canary
               value: v1
             #cookie:
             #  symbol:
@@ -713,7 +633,7 @@ spring:
           - name: v1-canary-query
             query:
               symbol: EQ
-              key: __iscg_canary
+              key: __gw_canary
               value: v1
         ## The number of load balancer statistician scheduler worker threads.
         statsSchedulerThread: 2 ## Default by 2
@@ -721,13 +641,13 @@ spring:
         registerRouteServicesInitialSeconds: 1 ## Default by 1s
         ## The interval at which the instance list is periodically pulled update register from the discovery server.
         registerRouteServicesDelaySeconds: 60 ## Default by 60s
-        defaultChoose: ## see:org.springcloud.gateway.core.commonsloadbalance.CanaryLoadBalancerFilterFactory#applyGlobalToConfig()
+        defaultChoose:
           ## When no canary condition is matched, whether all instances of the service are candidates.
           fallback-all-to-candidates: true
           load-balancer-algorithm: LC ## Optional(R|RR|WR|WRR|DH|SH|LC|LT|WLC|WLT)
           max-choose-tries: 10 ## Default by 10
           null-ping-to-reachable: true ## Default by true
-        defaultProbe: ## see:org.springcloud.gateway.core.commonsloadbalance.CanaryLoadBalancerFilterFactory#applyGlobalToConfig()
+        defaultProbe:
           debug: false ## Default by false
           initialSeconds: 3 ## Default by 3s
           delaySeconds: 10 ## Default by 10s
@@ -738,16 +658,12 @@ spring:
           ## status code is satisfied)
           expectStatuses: [200] ## Default by 200
           #expect-body: ## Default by ''
-
-  ## ######################
-  ## Security configuration.
-  ## ######################
   security:
     oauth2:
       client:
         provider:
           keycloak:
-            issuer-uri: https://scg.com/realms/master
+            issuer-uri: https://sso.springcloudgateway.com/realms/master
         registration:
           keycloak:
             client-id: portal
@@ -757,9 +673,6 @@ spring:
               - profile
               - roles
 
-## ######################
-## Actuator management
-## ######################
 management:
   server:
     port: 18086
@@ -774,25 +687,17 @@ management:
         include: '*'
   metrics:
     export:
-      ## see:org.springframework.boot.actuate.autoconfigure.metrics.export.prometheus.PrometheusMetricsExportAutoConfiguration
       prometheus:
         enabled: true ## Default by true
 
-## ######################
-## Logging configuration.
-## ######################
-## see:https://docs.spring.io/spring-boot/docs/2.6.7/reference/htmlsingle/#features.logging.custom-log-configuration
-## see:org.springcloud.gateway.core.logging.custom.logback.CustomLogbackConfigurer
 logging:
   register-shutdown-hook: false
   charset.file: UTF-8
-  ## Log levels belonging to this group will take effect synchronously.(TRACE|DEBUG|INFO|WARN|ERROR|FATAL|OFF)
-  ## see:https://docs.spring.io/spring-boot/docs/2.6.7/reference/htmlsingle/#features.logging.log-groups
   group:
     config: "org.springframework.boot.context.config"
     tomcat: "org.apache.catalina,org.apache.coyote,org.apache.tomcat"
   file: ## see:org.springframework.boot.logging.LogFile#toString
-    name: /tmp/${spring.application.name}.log
+    name: /mnt/disk1/log/${spring.application.name}/${spring.application.name}.log
   pattern:
     console: '%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(%5p) %clr(${PID:- }){magenta} %clr(---){faint} [%clr(${spring.application.name})] [%clr(%-12.12X{principal})] [%clr(%-32.32X{traceId})] [%clr(%-8.8X{spanId})] %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n%wEx'
     file: '%d{yyyy-MM-dd HH:mm:ss.SSS} %5p ${PID:- } [${spring.application.name}] [%-12.12X{principal}] [%-32.32X{traceId}] [%-8.8X{spanId}] --- [%t] %-40.40logger{39} : %m%n%wEx'
@@ -809,9 +714,6 @@ logging:
     root: INFO
     tomcat: INFO
     config: INFO
-    ## The built-in log groups:
-    ## web(org.springframework.core.codec,org.springframework.http,org.springframework.web,org.springframework.boot.actuate.endpoint.web,org.springframework.boot.web.servlet.ServletContextInitializerBeans)
-    ## sql(org.springframework.jdbc.core,org.hibernate.SQL,org.jooq.tools.LoggerListener)
     web: INFO
     sql: INFO
     reactor:
@@ -819,14 +721,10 @@ logging:
     org:
       springframework: INFO
       apache: INFO
+      springcloud: INFO
     feign: DEBUG
-    com:
-      springcloud.gateway.iaxcnm.gateway: INFO
 
-## ######################
-## Server configuration.
-## ######################
-server: ## see:org.springframework.boot.autoconfigure.web.ServerProperties
+server:
   port: 18085
   address: 0.0.0.0
   compression:
@@ -839,7 +737,7 @@ server: ## see:org.springframework.boot.autoconfigure.web.ServerProperties
     client-auth: NEED ## Default no set. Options(NONE|WANT|NEED)
     enabled-protocols: ['TLSv1', 'TLSv1.1', 'TLSv1.2', 'TLSv1.3'] ## Default no-set. Options(SSLv3|TLSv1|TLSv1.1|TLSv1.2|TLSv1.3)
     key-password: ${server.ssl.key-store-password}
-    key-store: classpath:cert.d/springcloud.gateway.io.p12
+    key-store: classpath:cert.d/wl4g.io.p12
     key-store-password: '123456'
     key-store-type: PKCS12 ## Default no-set by JKS. Options(JKS|PKCS12|DER|CER|..)
     #key-store-provider:

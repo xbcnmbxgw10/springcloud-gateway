@@ -45,7 +45,7 @@ import java.lang.reflect.Method;
 import java.net.URI;
 import java.net.URL;
 
-import org.springcloud.gateway.core.reflect.ReflectionUtils2;
+import org.springcloud.gateway.core.core.ReflectionUtils2;
 
 /**
  * Utility for detecting and accessing JBoss VFS in the classpath.

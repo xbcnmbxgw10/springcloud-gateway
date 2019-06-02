@@ -15,7 +15,7 @@
  */
 package org.springcloud.gateway.core.commons.entrypoint.config;
 
-import static org.springcloud.gateway.core.common.constant.GatewayIAMConstants.CONF_PREFIX_IAM_GATEWAY_LOGGING;
+import static org.springcloud.gateway.core.common.constant.GatewayMAIConstants.CONF_PREFIX_SCG_GATEWAY_LOGGING;
 
 import org.springcloud.gateway.core.commons.entrypoint.RequestGlobalFilter;
 import org.springcloud.gateway.core.commons.entrypoint.ResponseGlobalFilter;
@@ -32,7 +32,7 @@ import org.springframework.context.annotation.Bean;
 public class LoggingAutoConfiguration {
 
     @Bean
-    @ConfigurationProperties(prefix = CONF_PREFIX_IAM_GATEWAY_LOGGING)
+    @ConfigurationProperties(prefix = CONF_PREFIX_SCG_GATEWAY_LOGGING)
     public LoggingProperties loggingProperties() {
         return new LoggingProperties();
     }

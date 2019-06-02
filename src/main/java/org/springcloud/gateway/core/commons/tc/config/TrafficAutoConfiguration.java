@@ -23,7 +23,7 @@ import org.springframework.cloud.gateway.config.HttpClientCustomizer;
 import org.springframework.cloud.gateway.filter.headers.HttpHeadersFilter;
 import org.springframework.context.annotation.Bean;
 
-import org.springcloud.gateway.core.common.constant.GatewayIAMConstants;
+import org.springcloud.gateway.core.common.constant.GatewayMAIConstants;
 import org.springcloud.gateway.core.commons.microtag.GatewayMetricsFacade;
 import org.springcloud.gateway.core.commons.tc.TReplicationFilterFactory;
 
@@ -37,7 +37,7 @@ import org.springcloud.gateway.core.commons.tc.TReplicationFilterFactory;
 public class TrafficAutoConfiguration {
 
     @Bean
-    @ConfigurationProperties(prefix = GatewayIAMConstants.CONF_PREFIX_IAM_GATEWAY_TRAFFIC)
+    @ConfigurationProperties(prefix = GatewayMAIConstants.CONF_PREFIX_SCG_GATEWAY_TRAFFIC)
     public TrafficProperties trafficProperties() {
         return new TrafficProperties();
     }

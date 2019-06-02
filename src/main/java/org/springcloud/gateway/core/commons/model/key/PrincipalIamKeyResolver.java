@@ -40,7 +40,7 @@ public class PrincipalIamKeyResolver extends AbstractIamKeyResolver<PrincipalIam
     }
 
     /**
-     * {@link org.springcloud.gateway.core.commons.boostrap.sign.SimpleSignAuthingFilterFactory#bindSignedToContext()}
+     * {@link org.springcloud.gateway.core.commons.boostrap.util.SimpleRequestFactory#bindSignedToContext()}
      */
     @Override
     public Mono<String> resolve(PrincipalKeyResolverStrategy strategy, ServerWebExchange exchange) {

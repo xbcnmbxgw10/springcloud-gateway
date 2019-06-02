@@ -8,9 +8,9 @@
  */
 package org.springcloud.gateway.core.annotation.condition;
 
-import static org.springcloud.gateway.core.actualtion.JvmRuntimeTool.isJvmInDebugging;
 import static org.springcloud.gateway.core.annotation.condition.ConditionalOnJdwpDebug.ENABLE_PROPERTY;
 import static org.springcloud.gateway.core.lang.Assert2.isTrue;
+import static org.springcloud.gateway.core.tools.JvmRuntimeTool.isJvmInDebugging;
 import static java.lang.String.format;
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;

@@ -1578,9 +1578,9 @@
 				<directory>src/main/resources</directory>
 				<!-- When true and will check file encoding, causes the picture file copy to fail. -->
 				<filtering>false</filtering>
-				<excludes>
-					<exclude>*.yml</exclude>
-				</excludes>
+<!-- 				<excludes> -->
+<!-- 					<exclude>*.yml</exclude> -->
+<!-- 				</excludes> -->
 			</resource>
 		</resources>
 		<plugins>

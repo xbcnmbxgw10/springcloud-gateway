@@ -33,7 +33,7 @@ import org.springframework.context.annotation.Scope;
  * <b>for example bean alias definition: </b>
  * 
  * <pre>
- * import static org.springcloud.gateway.core.reflect.ReflectionUtils2.getFieldValues;
+ * import static org.springcloud.gateway.core.core.ReflectionUtils2.getFieldValues;
  * 
  * public interface MyProviderType {
  * 	public static final String BEAN_ALIAS1 = "myBeanAlias1";

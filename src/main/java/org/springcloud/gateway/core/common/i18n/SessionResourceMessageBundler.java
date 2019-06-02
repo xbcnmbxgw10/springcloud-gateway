@@ -15,7 +15,7 @@
  */
 package org.springcloud.gateway.core.common.i18n;
 
-import static org.springcloud.gateway.core.common.constant.FastCasIAMConstants.KEY_LANG_NAME;
+import static org.springcloud.gateway.core.common.constant.FastMAIConstants.KEY_LANG_NAME;
 
 import java.util.Locale;
 import java.util.Objects;

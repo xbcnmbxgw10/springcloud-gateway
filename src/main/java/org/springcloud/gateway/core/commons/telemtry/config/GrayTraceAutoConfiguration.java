@@ -15,7 +15,7 @@
  */
 package org.springcloud.gateway.core.commons.telemtry.config;
 
-import static org.springcloud.gateway.core.common.constant.GatewayIAMConstants.CONF_PREFIX_IAM_GATEWAY_TRACE;
+import static org.springcloud.gateway.core.common.constant.GatewayMAIConstants.CONF_PREFIX_SCG_GATEWAY_TRACE;
 
 import java.util.regex.Pattern;
 
@@ -74,7 +74,7 @@ import io.opentelemetry.instrumentation.api.instrumenter.http.HttpServerAttribut
 public class GrayTraceAutoConfiguration {
 
     @Bean
-    @ConfigurationProperties(prefix = CONF_PREFIX_IAM_GATEWAY_TRACE)
+    @ConfigurationProperties(prefix = CONF_PREFIX_SCG_GATEWAY_TRACE)
     public GrayTraceProperties grayTraceProperties() {
         return new GrayTraceProperties();
     }

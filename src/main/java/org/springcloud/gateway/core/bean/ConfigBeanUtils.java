@@ -15,12 +15,12 @@
  */
 package org.springcloud.gateway.core.bean;
 
+import static org.springcloud.gateway.core.core.ReflectionUtils2.findField;
+import static org.springcloud.gateway.core.core.ReflectionUtils2.isCompatibleType;
+import static org.springcloud.gateway.core.core.ReflectionUtils2.makeAccessible;
+import static org.springcloud.gateway.core.core.TypeUtils2.isSimpleCollectionType;
+import static org.springcloud.gateway.core.core.TypeUtils2.isSimpleType;
 import static org.springcloud.gateway.core.lang.Assert2.notNullOf;
-import static org.springcloud.gateway.core.reflect.ReflectionUtils2.findField;
-import static org.springcloud.gateway.core.reflect.ReflectionUtils2.isCompatibleType;
-import static org.springcloud.gateway.core.reflect.ReflectionUtils2.makeAccessible;
-import static org.springcloud.gateway.core.reflect.TypeUtils2.isSimpleCollectionType;
-import static org.springcloud.gateway.core.reflect.TypeUtils2.isSimpleType;
 import static java.lang.String.format;
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
@@ -32,7 +32,7 @@ import java.lang.reflect.Modifier;
 import javax.annotation.Nullable;
 import javax.validation.constraints.NotNull;
 
-import org.springcloud.gateway.core.reflect.ReflectionUtils2.FieldFilter;
+import org.springcloud.gateway.core.core.ReflectionUtils2.FieldFilter;
 
 /**
  * {@link ConfigBeanUtils}

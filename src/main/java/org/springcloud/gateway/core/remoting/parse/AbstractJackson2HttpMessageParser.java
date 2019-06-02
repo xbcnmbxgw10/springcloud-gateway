@@ -38,8 +38,9 @@ import com.fasterxml.jackson.databind.SerializationConfig;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.type.TypeFactory;
+
+import org.springcloud.gateway.core.core.ResolvableType;
 import org.springcloud.gateway.core.lang.Assert2;
-import org.springcloud.gateway.core.reflect.ResolvableType;
 import org.springcloud.gateway.core.remoting.standard.HttpMediaType;
 
 import org.apache.commons.lang3.reflect.TypeUtils;

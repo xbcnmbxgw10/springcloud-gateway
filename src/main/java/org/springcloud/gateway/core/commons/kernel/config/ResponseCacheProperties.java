@@ -15,7 +15,7 @@
  */
 package org.springcloud.gateway.core.commons.kernel.config;
 
-import static org.springcloud.gateway.core.common.constant.GatewayIAMConstants.CACHE_SUFFIX_IAM_GATEWAY_RESPONSECACHE;
+import static org.springcloud.gateway.core.common.constant.GatewayMAIConstants.CACHE_SUFFIX_IAM_GATEWAY_RESPONSECACHE;
 
 import java.time.Duration;
 import java.util.ArrayList;

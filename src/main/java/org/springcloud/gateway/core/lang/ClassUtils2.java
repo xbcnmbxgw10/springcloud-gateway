@@ -55,8 +55,8 @@ import javax.validation.constraints.NotNull;
 import org.apache.commons.collections.CollectionUtils;
 
 import org.springcloud.gateway.core.collection.ConcurrentReferenceHashMap;
-import org.springcloud.gateway.core.reflect.ReflectionUtils2;
-import org.springcloud.gateway.core.reflect.TypeUtils2;
+import org.springcloud.gateway.core.core.ReflectionUtils2;
+import org.springcloud.gateway.core.core.TypeUtils2;
 
 /**
  * Miscellaneous class utility methods. Mainly for internal use within the

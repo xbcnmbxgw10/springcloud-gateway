@@ -15,7 +15,7 @@
  */
 package org.springcloud.gateway.core.commons.zookeeper.repository;
 
-import static org.springcloud.gateway.core.common.constant.GatewayIAMConstants.CACHE_PREFIX_IAM_GWTEWAY_ROUTES;
+import static org.springcloud.gateway.core.common.constant.GatewayMAIConstants.CACHE_PREFIX_SCG_GWTEWAY_ROUTES;
 import static org.springcloud.gateway.core.modelseri.JacksonUtils.parseJSON;
 import static org.springcloud.gateway.core.modelseri.JacksonUtils.toJSONString;
 import static java.util.stream.Collectors.toList;
@@ -42,7 +42,7 @@ public class RedisRouteDefinitionRepository extends AbstractRouteRepository {
     @Override
     protected Flux<RouteDefinition> loadPermanentRouteDefinitions() {
         return Flux.fromIterable(stringTemplate.opsForHash()
-                .values(CACHE_PREFIX_IAM_GWTEWAY_ROUTES)
+                .values(CACHE_PREFIX_SCG_GWTEWAY_ROUTES)
                 .stream()
                 .map(routeDefinition -> parseJSON(routeDefinition.toString(), RouteDefinition.class))
                 .collect(toList()));
@@ -51,7 +51,7 @@ public class RedisRouteDefinitionRepository extends AbstractRouteRepository {
     @Override
     public Mono<Void> save(Mono<RouteDefinition> route) {
         return route.flatMap(routeDefinition -> {
-            stringTemplate.opsForHash().put(CACHE_PREFIX_IAM_GWTEWAY_ROUTES, routeDefinition.getId(),
+            stringTemplate.opsForHash().put(CACHE_PREFIX_SCG_GWTEWAY_ROUTES, routeDefinition.getId(),
                     toJSONString(routeDefinition));
             return Mono.empty();
         });
@@ -60,7 +60,7 @@ public class RedisRouteDefinitionRepository extends AbstractRouteRepository {
     @Override
     public Mono<Void> delete(Mono<String> routeId) {
         return routeId.flatMap(id -> {
-            stringTemplate.opsForHash().delete(CACHE_PREFIX_IAM_GWTEWAY_ROUTES, id);
+            stringTemplate.opsForHash().delete(CACHE_PREFIX_SCG_GWTEWAY_ROUTES, id);
             return Mono.empty();
         });
     }

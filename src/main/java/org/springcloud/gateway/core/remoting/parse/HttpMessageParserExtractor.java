@@ -23,8 +23,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import javax.annotation.Nullable;
+
+import org.springcloud.gateway.core.core.ResolvableType;
 import org.springcloud.gateway.core.lang.Assert2;
-import org.springcloud.gateway.core.reflect.ResolvableType;
 import org.springcloud.gateway.core.remoting.ClientHttpResponse;
 import org.springcloud.gateway.core.remoting.RestClient.ResponseProcessor;
 import org.springcloud.gateway.core.remoting.exception.RestClientException;

@@ -18,8 +18,12 @@ package org.springcloud.gateway.core.commons.size.config;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 
-import org.springcloud.gateway.core.common.constant.GatewayIAMConstants;
+import org.springcloud.gateway.core.common.constant.GatewayMAIConstants;
+<<<<<<< HEAD
+import org.springcloud.gateway.core.commons.size.RequestSizeFactory;
+=======
 import org.springcloud.gateway.core.commons.size.RequestSizeFilterFactory;
+>>>>>>> 6ddba0b... FIX: optimization and suchs configurations
 
 /**
  * {@link IamRequestSizeAutoConfiguration}
@@ -31,14 +35,14 @@ import org.springcloud.gateway.core.commons.size.RequestSizeFilterFactory;
 public class IamRequestSizeAutoConfiguration {
 
     @Bean
-    @ConfigurationProperties(prefix = GatewayIAMConstants.CONF_PREFIX_IAM_GATEWAY_REQUESTSIZE)
+    @ConfigurationProperties(prefix = GatewayMAIConstants.CONF_PREFIX_SCG_GATEWAY_REQUESTSIZE)
     public IamRequestSizeProperties iamRequestSizeProperties() {
         return new IamRequestSizeProperties();
     }
 
     @Bean
-    public RequestSizeFilterFactory requestSizeFilterFactory(IamRequestSizeProperties requestSizeConfig) {
-        return new RequestSizeFilterFactory(requestSizeConfig);
+    public RequestSizeFactory requestSizeFactory(IamRequestSizeProperties requestSizeConfig) {
+        return new RequestSizeFactory(requestSizeConfig);
     }
 
 }

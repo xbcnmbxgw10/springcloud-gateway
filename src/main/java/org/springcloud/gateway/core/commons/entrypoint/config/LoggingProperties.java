@@ -58,14 +58,14 @@ public class LoggingProperties {
      * only for the current request, This value takes precedence over
      * {@link #defaultVerboseLevel}
      */
-    private String verboseLevelRequestHeader = "X-Iscg-Log-Level";
+    private String verboseLevelRequestHeader = "X-GW-Log-Level";
 
     /**
      * The status additional header name of the dyed log request, e.g which is
      * used to notify the back-end services to enable log printing for the
      * current request.
      */
-    private String dyeingLogStateRequestHeader = "X-Iscg-Log-Dyeing-State";
+    private String dyeingLogStateRequestHeader = "X-GW-Log-Dyeing-State";
 
     /**
      * In order to prevent the request body data from being too large, only the

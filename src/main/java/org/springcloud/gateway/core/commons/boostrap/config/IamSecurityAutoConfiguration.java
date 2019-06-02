@@ -20,9 +20,14 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.redis.core.StringRedisTemplate;
 
-import org.springcloud.gateway.core.common.constant.GatewayIAMConstants;
+import org.springcloud.gateway.core.common.constant.GatewayMAIConstants;
+<<<<<<< HEAD
+import org.springcloud.gateway.core.commons.boostrap.util.SimpleRequestFactory;
+import org.springcloud.gateway.core.commons.event.DefaultRedisSignAuthingEventRecoder;
+=======
 import org.springcloud.gateway.core.commons.boostrap.sign.SimpleSignAuthingFilterFactory;
 import org.springcloud.gateway.core.commons.bootstrap.sign.event.DefaultRedisSignAuthingEventRecoder;
+>>>>>>> 6ddba0b... FIX: optimization and suchs configurations
 import org.springcloud.gateway.core.commons.microtag.GatewayMetricsFacade;
 import org.springcloud.gateway.core.eventbus.EventBusSupport;
 
@@ -36,7 +41,7 @@ import org.springcloud.gateway.core.eventbus.EventBusSupport;
 public class IamSecurityAutoConfiguration {
 
     @Bean
-    @ConfigurationProperties(prefix = GatewayIAMConstants.CONF_PREFIX_IAM_GATEWAY_SECURITY)
+    @ConfigurationProperties(prefix = GatewayMAIConstants.CONF_PREFIX_SCG_GATEWAY_SECURITY)
     public IamSecurityProperties iamSecurityProperties() {
         return new IamSecurityProperties();
     }
@@ -49,12 +54,12 @@ public class IamSecurityAutoConfiguration {
     }
 
     @Bean
-    public SimpleSignAuthingFilterFactory simpleSignAuthingFilterFactory(
+    public SimpleRequestFactory simpleRequestFactory(
             IamSecurityProperties authingConfig,
             StringRedisTemplate stringTemplate,
             GatewayMetricsFacade metricsFacade,
             @Qualifier(BEAN_SIMPLE_SIGN_EVENTBUS) EventBusSupport eventBus) {
-        return new SimpleSignAuthingFilterFactory(authingConfig, stringTemplate, metricsFacade, eventBus);
+        return new SimpleRequestFactory(authingConfig, stringTemplate, metricsFacade, eventBus);
     }
 
     // Simple signature authorizer event recorder
