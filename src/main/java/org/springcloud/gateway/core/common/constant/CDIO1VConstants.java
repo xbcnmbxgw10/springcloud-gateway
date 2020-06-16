@@ -44,7 +44,7 @@ import lombok.Getter;
  * @date 2018年11月13日
  * @since
  */
-public abstract class V1OidcIAMConstants extends IAMConstants {
+public abstract class CDIO1VConstants extends SCGBaseConstants {
 
     /** endpoint URIs definitions. */
     public static final String URI_IAM_OIDC_ENDPOINT_NS_NAME = "realm"; // realm/namespace/tenant
@@ -78,7 +78,7 @@ public abstract class V1OidcIAMConstants extends IAMConstants {
     public static final String KEY_IAM_OIDC_TOKEN_TYPE_BEARER = "Bearer";
 
     /** cache key definitions. */
-    public static final String CACHE_OIDC_PREFIX = CONF_PREFIX_IAM + "oidc:";
+    public static final String CACHE_OIDC_PREFIX = CONF_PREFIX_SCG + "oidc:";
     public static final String CACHE_OIDC_AUTHCODE_PREFIX = CACHE_OIDC_PREFIX + "code:";
     public static final String CACHE_OIDC_ACCESSTOKEN_PREFIX = CACHE_OIDC_PREFIX + "ak:";
     public static final String CACHE_OIDC_REFRESHTOKEN_PREFIX = CACHE_OIDC_PREFIX + "rk:";
@@ -723,7 +723,7 @@ public abstract class V1OidcIAMConstants extends IAMConstants {
     }
 
     public static final String TPL_IAM_OIDC_RESPONSE_MODE_FROM_POST_HTML = ResourceUtils2
-            .getResourceString(V1OidcIAMConstants.class, "response_mode_from_post_html.tpl");
+            .getResourceString(CDIO1VConstants.class, "response_mode_from_post_html.tpl");
 
     /**
      * claims definitions.

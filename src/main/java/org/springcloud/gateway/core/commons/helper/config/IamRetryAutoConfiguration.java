@@ -18,7 +18,7 @@ package org.springcloud.gateway.core.commons.helper.config;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 
-import org.springcloud.gateway.core.common.constant.GatewayIAMConstants;
+import org.springcloud.gateway.core.common.constant.GatewayMAIConstants;
 import org.springcloud.gateway.core.commons.helper.HelperGatewayFilterFactory;
 
 /**
@@ -31,7 +31,7 @@ import org.springcloud.gateway.core.commons.helper.HelperGatewayFilterFactory;
 public class IamRetryAutoConfiguration {
 
     @Bean
-    @ConfigurationProperties(prefix = GatewayIAMConstants.CONF_PREFIX_IAM_GATEWAY_RETRY)
+    @ConfigurationProperties(prefix = GatewayMAIConstants.CONF_PREFIX_SCG_GATEWAY_RETRY)
     public IamRetryProperties iamRetryProperties() {
         return new IamRetryProperties();
     }

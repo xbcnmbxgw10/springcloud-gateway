@@ -19,8 +19,8 @@ import static org.springcloud.gateway.core.collection.CollectionUtils2.safeArray
 import static org.springcloud.gateway.core.lang.Assert2.notNullOf;
 import static org.springcloud.gateway.core.lang.ClassUtils2.resolveClassName;
 import static org.springcloud.gateway.core.lang.StringUtils2.eqIgnCase;
-import static org.springcloud.gateway.core.reflect.ReflectionUtils2.findField;
 import static org.springcloud.gateway.core.constant.CoreInfraConstants.TRACE_REQUEST_ID_HEADER;
+import static org.springcloud.gateway.core.core.ReflectionUtils2.findField;
 import static java.util.Objects.nonNull;
 import static java.util.stream.Collectors.toList;
 import static org.apache.commons.lang3.StringUtils.split;

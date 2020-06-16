@@ -18,7 +18,7 @@ package org.springcloud.gateway.core.commons.ipfs.config;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 
-import org.springcloud.gateway.core.common.constant.GatewayIAMConstants;
+import org.springcloud.gateway.core.common.constant.GatewayMAIConstants;
 import org.springcloud.gateway.core.commons.ipfs.SubnetFilterFactory;
 import org.springcloud.gateway.core.commons.microtag.GatewayMetricsFacade;
 
@@ -32,7 +32,7 @@ import org.springcloud.gateway.core.commons.microtag.GatewayMetricsFacade;
 public class IPFSAutoConfiguration {
 
     @Bean
-    @ConfigurationProperties(prefix = GatewayIAMConstants.CONF_PREFIX_IAM_GATEWAY_IPFILTER)
+    @ConfigurationProperties(prefix = GatewayMAIConstants.CONF_PREFIX_SCG_GATEWAY_IPFILTER)
     public IPFSProperties iPFSProperties() {
         return new IPFSProperties();
     }

@@ -168,7 +168,7 @@ public abstract class EntrypointBaseGlobalFilter implements GlobalFilter, Ordere
                                     exchange.getRequest().getHeaders().getFirst(loggingConfig.getDyeingLogStateRequestHeader()),
                                     routeIdPredicateSupplier));
         } catch (Exception e) {
-            log.warn("Evaluating failed, logging disabled by default, reason: %s", e.getMessage());
+            log.debug("Evaluating failed, logging disabled by default, reason: %s", e.getMessage());
             return false;
         }
     }

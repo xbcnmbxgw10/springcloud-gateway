@@ -1,4 +1,4 @@
-package org.springcloud.gateway.core.net;
+package org.springcloud.gateway.core.filter;
 
 import java.math.BigInteger;
 import java.net.Inet4Address;
@@ -11,7 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * Such source code comes from:
- * {@link org.springcloud.gateway.core.net.netty.handler.ipfilter.CIDR}
+ * {@link org.springcloud.gateway.core.filter.netty.handler.ipfilter.CIDR}
  * 
  * @author springcloudgateway &lt;springcloudgateway@gmail.com&gt;
  * @version v1.0.0

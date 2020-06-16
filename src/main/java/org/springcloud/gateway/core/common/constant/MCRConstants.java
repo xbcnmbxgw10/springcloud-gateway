@@ -22,13 +22,13 @@ package org.springcloud.gateway.core.common.constant;
  * @version v1.0.0
  * @since v3.0.0
  */
-public abstract class RcmIAMConstants extends IAMConstants {
+public abstract class MCRConstants extends SCGBaseConstants {
 
-    public static final String CONF_PREFIX_IAM_RCM = CONF_PREFIX_IAM + ".rcm";
-    public static final String CONF_PREFIX_IAM_RCM_EVENTBUS = CONF_PREFIX_IAM_RCM + ".eventbus";
-    public static final String CONF_PREFIX_IAM_RCM_EVENTBUS_KAFKA = CONF_PREFIX_IAM_RCM_EVENTBUS + ".kafka";
-    public static final String CONF_PREFIX_IAM_RCM_EVENTBUS_PULSAR = CONF_PREFIX_IAM_RCM_EVENTBUS + ".pulsar";
-    public static final String CONF_PREFIX_IAM_RCM_EVENTBUS_ROCKETMQ = CONF_PREFIX_IAM_RCM_EVENTBUS + ".rocketmq";
+    public static final String CONF_PREFIX_SCG_RCM = CONF_PREFIX_SCG + ".rcm";
+    public static final String CONF_PREFIX_SCG_RCM_EVENTBUS = CONF_PREFIX_SCG_RCM + ".eventbus";
+    public static final String CONF_PREFIX_SCG_RCM_EVENTBUS_KAFKA = CONF_PREFIX_SCG_RCM_EVENTBUS + ".kafka";
+    public static final String CONF_PREFIX_SCG_RCM_EVENTBUS_PULSAR = CONF_PREFIX_SCG_RCM_EVENTBUS + ".pulsar";
+    public static final String CONF_PREFIX_SCG_RCM_EVENTBUS_ROCKETMQ = CONF_PREFIX_SCG_RCM_EVENTBUS + ".rocketmq";
 
     public static final String DEF_IAM_RCM_EVENTBUS_TOPIC = "iam_event";
 

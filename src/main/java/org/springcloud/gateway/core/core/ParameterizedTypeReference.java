@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springcloud.gateway.core.reflect;
+package org.springcloud.gateway.core.core;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;

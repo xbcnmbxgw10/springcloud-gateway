@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springcloud.gateway.core.reflect;
+package org.springcloud.gateway.core.core;
 
 import static java.lang.reflect.Modifier.*;
 import static java.util.Objects.isNull;
@@ -38,7 +38,7 @@ import org.springcloud.gateway.core.lang.Assert2;
 
 /**
  * Java class type processing tool.</br>
- * See: {@link org.springcloud.gateway.core.reflect.TypeUtils2}
+ * See: {@link org.springcloud.gateway.core.core.TypeUtils2}
  * 
  * @author springcloudgateway <springcloudgateway@gmail.com>
  * @version v1.0.0

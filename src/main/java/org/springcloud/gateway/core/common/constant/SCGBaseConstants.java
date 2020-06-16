@@ -1,7 +1,5 @@
 /*
- * Copyright (C) 2017 ~ 2025 the original author or authors.
- * <springcloudgateway@gmail.com> Technology CO.LTD.
- * All rights reserved.
+ * Copyright 2017 ~ 2025 the original author or authors. <springcloudgateway@gmail.com>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,25 +12,27 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
- * Reference to website: http://springcloud.gateway.com
  */
 package org.springcloud.gateway.core.common.constant;
 
+import org.springcloud.gateway.core.constant.BaseConstants;
+
 /**
- * {@link ServiceIAMConstants}
+ * Based IAM configuration constants.
  * 
  * @author springcloudgateway &lt;springcloudgateway@gmail.com&gt;
  * @version v1.0.0
  * @sine v1.0
  * @see
  */
-public abstract class ServiceIAMConstants extends IAMConstants {
+public abstract class SCGBaseConstants extends BaseConstants {
 
-    public static final String CONF_PREFIX_IAM_SERVICE = CONF_PREFIX_IAM + ".service";
+    public static final String CONF_PREFIX_SCG = "spring.scg";
+    public static final String CONF_PREFIX_SCG_SECURITY_SNS = CONF_PREFIX_SCG + ".sns";
+    public static final String CONF_PREFIX_SCG_SECURITY_CAPTCHA = CONF_PREFIX_SCG + ".captcha";
 
-    public static final String KEY_IAM_RPC_PRINCIPAL_ID = "currentIamPrincipalId";
-    public static final String KEY_IAM_RPC_PRINCIPAL_USER = "currentIamPrincipalUser";
-    public static final String KEY_IAM_RPC_PRINCIPAL = "currentIamPrincipal";
+    public static final String CACHE_PREFIX_IAM = "scg";
+
+    public static final String KEY_IAM_SUBJECT_USER = "subjectUserInfo";
 
 }

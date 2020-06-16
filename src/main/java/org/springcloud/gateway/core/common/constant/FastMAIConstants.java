@@ -23,7 +23,7 @@ package org.springcloud.gateway.core.common.constant;
  * @date 2018年11月13日
  * @since
  */
-public abstract class FastCasIAMConstants extends IAMConstants {
+public abstract class FastMAIConstants extends SCGBaseConstants {
 
     //
     // --- IAM Common Constants. ---
@@ -84,17 +84,17 @@ public abstract class FastCasIAMConstants extends IAMConstants {
      */
     public static final String URI_AUTHENTICATOR = "/authenticator";
 
-    public static final String CACHE_PREFIX_IAM_FASTCAS = CACHE_PREFIX_IAM + "fastcas:";
+    public static final String CACHE_PREFIX_SCG_FASTCAS = CACHE_PREFIX_IAM + "fastcas:";
 
     /**
      * {@link IamSession} relation attributes cache name.
      */
-    public static final String CACHE_PREFIX_IAM_SESSION_REFATTRS = CACHE_PREFIX_IAM_FASTCAS + "session:refattrs:";
+    public static final String CACHE_PREFIX_SCG_SESSION_REFATTRS = CACHE_PREFIX_SCG_FASTCAS + "session:refattrs:";
 
     /**
      * IAM replay attacks signature cache name.
      */
-    public static final String CACHE_PREFIX_IAM_REPLAY_SIGN = CACHE_PREFIX_IAM_FASTCAS + "security:replaysign:";
+    public static final String CACHE_PREFIX_SCG_REPLAY_SIGN = CACHE_PREFIX_SCG_FASTCAS + "security:replaysign:";
 
     /**
      * IAM XSRF endpoint base URI.
@@ -222,42 +222,42 @@ public abstract class FastCasIAMConstants extends IAMConstants {
     /**
      * IAM client/server authentication session stored cache name.
      */
-    public static final String CACHE_PREFIX_IAM_SESSION = CACHE_PREFIX_IAM + "session:id:";
+    public static final String CACHE_PREFIX_SCG_SESSION = CACHE_PREFIX_IAM + "session:id:";
     /**
      * IAM client authentication authorization information storage cache name.
      */
-    public static final String CACHE_PREFIX_IAM_TICKET_CLIENT = CACHE_PREFIX_IAM + "ticket:c:";
+    public static final String CACHE_PREFIX_SCG_TICKET_CLIENT = CACHE_PREFIX_IAM + "ticket:c:";
     /**
      * IAM server authentication authorization information storage cache name.
      */
-    public static final String CACHE_PREFIX_IAM_TICKET_SERVER = CACHE_PREFIX_IAM + "ticket:s:";
+    public static final String CACHE_PREFIX_SCG_TICKET_SERVER = CACHE_PREFIX_IAM + "ticket:s:";
 
     /**
      * Login authentication related processing cache name.
      */
-    public static final String CACHE_PREFIX_IAM_SNSAUTH = CACHE_PREFIX_IAM + "snsauth:";
+    public static final String CACHE_PREFIX_SCG_SNSAUTH = CACHE_PREFIX_IAM + "snsauth:";
     /**
      * IAM server matching CAPTCHA verification failure counter cache name.
      */
-    public static final String CACHE_PREFIX_IAM_FAILFAST_COUNTER_CAPTCHA = CACHE_PREFIX_IAM + "counter:captcha:";
+    public static final String CACHE_PREFIX_SCG_FAILFAST_COUNTER_CAPTCHA = CACHE_PREFIX_IAM + "counter:captcha:";
     /**
      * IAM server matching SMS verification failure counter cache name.
      */
-    public static final String CACHE_PREFIX_IAM_FAILFAST_COUNTER_SMS = CACHE_PREFIX_IAM + "counter:sms:";
+    public static final String CACHE_PREFIX_SCG_FAILFAST_COUNTER_SMS = CACHE_PREFIX_IAM + "counter:sms:";
     /**
      * IAM server matching verification failure counter cache name.
      */
-    public static final String CACHE_PREFIX_IAM_FAILFAST_COUNTER_MATCH = CACHE_PREFIX_IAM + "counter:credentials:";
+    public static final String CACHE_PREFIX_SCG_FAILFAST_COUNTER_MATCH = CACHE_PREFIX_IAM + "counter:credentials:";
     /**
      * Security verifier for jigsaw captcha image cache name.
      */
-    public static final String CACHE_PREFIX_IAM_VERIFY_JIGSAW_IMG = CACHE_PREFIX_IAM + "verify:jigsaw:img";
+    public static final String CACHE_PREFIX_SCG_VERIFY_JIGSAW_IMG = CACHE_PREFIX_IAM + "verify:jigsaw:img";
     /**
      * Cryptographic service cache name.
      */
-    public static final String CACHE_PREFIX_IAM_CRYPTO = CACHE_PREFIX_IAM + "crypto:keypairs";
+    public static final String CACHE_PREFIX_SCG_CRYPTO = CACHE_PREFIX_IAM + "crypto:keypairs";
     /** Simple risk control handler umidToken cache key. */
-    public static final String CACHE_PREFIX_IAM_RCM_UMIDTOKEN = CACHE_PREFIX_IAM + "rcm:umidtoken:";
+    public static final String CACHE_PREFIX_SCG_RCM_UMIDTOKEN = CACHE_PREFIX_IAM + "rcm:umidtoken:";
 
     /**
      * Login failure overrun, lock cache name.

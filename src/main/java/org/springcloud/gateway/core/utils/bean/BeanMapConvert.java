@@ -22,9 +22,9 @@ import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.util.*;
 
-import static org.springcloud.gateway.core.reflect.TypeUtils2.isSimpleType;
 import static java.util.Objects.isNull;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
+import static org.springcloud.gateway.core.core.TypeUtils2.isSimpleType;
 
 /**
  * Bean and Map Convert. </br>

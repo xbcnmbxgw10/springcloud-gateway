@@ -42,8 +42,8 @@ import org.springcloud.gateway.core.commons.ipfs.config.IPFSProperties.StrategyP
 import org.springcloud.gateway.core.commons.microtag.GatewayMetricsFacade;
 import org.springcloud.gateway.core.commons.microtag.GatewayMetricsFacade.MetricsName;
 import org.springcloud.gateway.core.commons.microtag.GatewayMetricsFacade.MetricsTag;
+import org.springcloud.gateway.core.filter.CIDR;
 import org.springcloud.gateway.core.bean.ConfigBeanUtils;
-import org.springcloud.gateway.core.net.CIDR;
 
 import io.netty.handler.ipfilter.IpFilterRuleType;
 import io.netty.handler.ipfilter.IpSubnetFilterRule;

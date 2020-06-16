@@ -15,10 +15,10 @@
  */
 package org.springcloud.gateway.core.kit.ssh2;
 
+import org.springcloud.gateway.core.core.ObjectInstantiators;
 import org.springcloud.gateway.core.function.CallbackFunction;
 import org.springcloud.gateway.core.function.ProcessFunction;
 import org.springcloud.gateway.core.log.SmartLogger;
-import org.springcloud.gateway.core.reflect.ObjectInstantiators;
 
 import java.io.CharArrayWriter;
 import java.io.File;

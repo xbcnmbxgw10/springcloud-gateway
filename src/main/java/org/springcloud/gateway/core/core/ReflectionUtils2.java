@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springcloud.gateway.core.reflect;
+package org.springcloud.gateway.core.core;
 
 import static java.lang.reflect.Modifier.isAbstract;
 import static java.lang.reflect.Modifier.isPublic;
@@ -48,9 +48,9 @@ import javax.annotation.Nullable;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springcloud.gateway.core.collection.ConcurrentReferenceHashMap;
 
+import static org.springcloud.gateway.core.core.TypeUtils2.isSimpleCollectionType;
+import static org.springcloud.gateway.core.core.TypeUtils2.isSimpleType;
 import static org.springcloud.gateway.core.lang.Assert2.*;
-import static org.springcloud.gateway.core.reflect.TypeUtils2.isSimpleCollectionType;
-import static org.springcloud.gateway.core.reflect.TypeUtils2.isSimpleType;
 
 /**
  * Enhanced utility class for working with the reflection API and handling

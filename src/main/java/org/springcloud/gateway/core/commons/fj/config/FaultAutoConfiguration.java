@@ -18,7 +18,7 @@ package org.springcloud.gateway.core.commons.fj.config;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 
-import org.springcloud.gateway.core.common.constant.GatewayIAMConstants;
+import org.springcloud.gateway.core.common.constant.GatewayMAIConstants;
 import org.springcloud.gateway.core.commons.fj.InectorFilterFactory;
 import org.springcloud.gateway.core.commons.microtag.GatewayMetricsFacade;
 
@@ -32,7 +32,7 @@ import org.springcloud.gateway.core.commons.microtag.GatewayMetricsFacade;
 public class FaultAutoConfiguration {
 
     @Bean
-    @ConfigurationProperties(prefix = GatewayIAMConstants.CONF_PREFIX_IAM_GATEWAY_FAULT)
+    @ConfigurationProperties(prefix = GatewayMAIConstants.CONF_PREFIX_SCG_GATEWAY_FAULT)
     public FaultProperties faultProperties() {
         return new FaultProperties();
     }
