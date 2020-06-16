@@ -19,16 +19,13 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 
 import org.springcloud.gateway.core.common.constant.GatewayMAIConstants;
-<<<<<<< HEAD
 import org.springcloud.gateway.core.commons.size.RequestSizeFactory;
-=======
-import org.springcloud.gateway.core.commons.size.RequestSizeFilterFactory;
->>>>>>> 6ddba0b... FIX: optimization and suchs configurations
 
 /**
  * {@link IamRequestSizeAutoConfiguration}
  * 
- * @author springcloudgateway &lt;springcloudgateway@163.com, springcloudgateway@163.com&gt;
+ * @author springcloudgateway &lt;springcloudgateway@163.com,
+ *         springcloudgateway@163.com&gt;
  * @version v1.0.0
  * @since v3.0.0
  */

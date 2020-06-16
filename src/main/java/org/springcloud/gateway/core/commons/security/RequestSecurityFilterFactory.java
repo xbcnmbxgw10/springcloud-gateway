@@ -40,11 +40,8 @@ import org.springcloud.gateway.core.commons.fault.IamGatewayFault.SafeFilterOrde
 import org.springcloud.gateway.core.commons.microtag.GatewayMetricsFacade;
 import org.springcloud.gateway.core.commons.microtag.GatewayMetricsFacade.MetricsName;
 import org.springcloud.gateway.core.commons.microtag.GatewayMetricsFacade.MetricsTag;
-<<<<<<< HEAD:src/main/java/org/springcloud/gateway/core/commons/security/RequestSecurityFilterFactory.java
 import org.springcloud.gateway.core.commons.security.config.IPFSProperties;
 import org.springcloud.gateway.core.commons.security.config.IPFSProperties.StrategyProperties;
-=======
->>>>>>> 6ddba0b... FIX: optimization and suchs configurations:src/main/java/org/springcloud/gateway/core/commons/ipfs/SubnetFilterFactory.java
 import org.springcloud.gateway.core.filter.CIDR;
 import org.springcloud.gateway.core.bean.ConfigBeanUtils;
 
@@ -60,7 +57,8 @@ import reactor.core.publisher.Mono;
 /**
  * {@link RequestSecurityFilterFactory}
  * 
- * @author springcloudgateway &lt;springcloudgateway@163.com, springcloudgateway@163.com&gt;
+ * @author springcloudgateway &lt;springcloudgateway@163.com,
+ *         springcloudgateway@163.com&gt;
  * @version v1.0.0
  * @since v3.0.0
  * @see {@link io.netty.handler.ipfilter.IpSubnetFilterRule}

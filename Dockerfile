@@ -15,10 +15,23 @@
 FROM openjdk:8u212-jre-alpine3.9 AS springboot_base
 LABEL maintainer="jacks01 <jacks01@gmail.com>"
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+RUN echo "http://mirrors.aliyun.com/alpine/v3.8/main" > /etc/apk/repositories \
+&& echo "http://mirrors.aliyun.com/alpine/v3.8/community" >> /etc/apk/repositories \
+&& apk update upgrade \
+&& apk add --no-cache procps unzip curl bash tini tzdata \
+=======
+>>>>>>> 1.0
 RUN echo "http://mirrors.aliyun.com/alpine/v3.9/main" > /etc/apk/repositories \
 && echo "http://mirrors.aliyun.com/alpine/v3.9/community" >> /etc/apk/repositories \
 && apk update upgrade \
 && apk add --no-cache procps unzip curl bash openssh sshpass \
+<<<<<<< HEAD
+=======
+>>>>>>> 5b56972... FIX: YAML configurations should be packaged in and run in ide to be loaded?
+>>>>>>> 1.0
 && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
 && echo "Asia/Shanghai" > /etc/timezone
 
@@ -79,11 +92,28 @@ echo \"Starting \${APP_NAME}:\${APP_VERSION}(\${APP_ACTIVE}) on \${APP_PORT} ...
 exec \${CMD_EXEC}\n\
 echo \"Started \${APP_NAME}:\${APP_VERSION}(\${APP_ACTIVE}) on \${APP_PORT}\"\n" >>/docker-entrypoint.sh
 <<<<<<< HEAD
+<<<<<<< HEAD
 ENTRYPOINT ["/docker-entrypoint.sh"]
 =======
+=======
+=======
+<<<<<<< HEAD
+ENTRYPOINT ["/docker-entrypoint.sh"]
+=======
+>>>>>>> 5b56972... FIX: YAML configurations should be packaged in and run in ide to be loaded?
+>>>>>>> 1.0
 RUN adduser ${APP_NAME} --disabled-password \
 && chown -R ${APP_NAME}:${APP_NAME} ${APP_HOME_PARENT} ${APP_DATA} ${APP_LOG} /docker-entrypoint.sh \
 && chmod -R 755 ${APP_HOME_PARENT} /docker-entrypoint.sh
 USER ${APP_NAME}
+<<<<<<< HEAD
 ENTRYPOINT ["/sbin/tini", "-s", "-g", "--", "/docker-entrypoint.sh"]
 >>>>>>> 6ddba0b... FIX: optimization and suchs configurations
+=======
+<<<<<<< HEAD
+ENTRYPOINT ["/sbin/tini", "-s", "-g", "--", "/docker-entrypoint.sh"]
+=======
+ENTRYPOINT ["/sbin/tini", "-s", "-g", "--", "/docker-entrypoint.sh"]
+>>>>>>> 6ddba0b... FIX: optimization and suchs configurations
+>>>>>>> 5b56972... FIX: YAML configurations should be packaged in and run in ide to be loaded?
+>>>>>>> 1.0

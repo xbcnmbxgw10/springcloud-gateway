@@ -21,20 +21,16 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.data.redis.core.StringRedisTemplate;
 
 import org.springcloud.gateway.core.common.constant.GatewayMAIConstants;
-<<<<<<< HEAD
 import org.springcloud.gateway.core.commons.boostrap.util.SimpleRequestFactory;
 import org.springcloud.gateway.core.commons.event.DefaultRedisSignAuthingEventRecoder;
-=======
-import org.springcloud.gateway.core.commons.boostrap.sign.SimpleSignAuthingFilterFactory;
-import org.springcloud.gateway.core.commons.bootstrap.sign.event.DefaultRedisSignAuthingEventRecoder;
->>>>>>> 6ddba0b... FIX: optimization and suchs configurations
 import org.springcloud.gateway.core.commons.microtag.GatewayMetricsFacade;
 import org.springcloud.gateway.core.eventbus.EventBusSupport;
 
 /**
  * {@link IamSecurityAutoConfiguration}
  * 
- * @author springcloudgateway &lt;springcloudgateway@163.com, springcloudgateway@163.com&gt;
+ * @author springcloudgateway &lt;springcloudgateway@163.com,
+ *         springcloudgateway@163.com&gt;
  * @version v1.0.0
  * @since v3.0.0
  */

@@ -19,17 +19,14 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 
 import org.springcloud.gateway.core.common.constant.GatewayMAIConstants;
-<<<<<<< HEAD:src/main/java/org/springcloud/gateway/core/commons/security/config/IPFSAutoConfiguration.java
-=======
-import org.springcloud.gateway.core.commons.ipfs.SubnetFilterFactory;
->>>>>>> 6ddba0b... FIX: optimization and suchs configurations:src/main/java/org/springcloud/gateway/core/commons/ipfs/config/IPFSAutoConfiguration.java
 import org.springcloud.gateway.core.commons.microtag.GatewayMetricsFacade;
 import org.springcloud.gateway.core.commons.security.RequestSecurityFilterFactory;
 
 /**
  * {@link IPFSAutoConfiguration}
  * 
- * @author springcloudgateway &lt;springcloudgateway@163.com, springcloudgateway@163.com&gt;
+ * @author springcloudgateway &lt;springcloudgateway@163.com,
+ *         springcloudgateway@163.com&gt;
  * @version v1.0.0
  * @since v3.0.0
  */
@@ -42,7 +39,9 @@ public class IPFSAutoConfiguration {
     }
 
     @Bean
-    public RequestSecurityFilterFactory requestSecurityFilterFactory(IPFSProperties ipListConfig, GatewayMetricsFacade metricsFacade) {
+    public RequestSecurityFilterFactory requestSecurityFilterFactory(
+            IPFSProperties ipListConfig,
+            GatewayMetricsFacade metricsFacade) {
         return new RequestSecurityFilterFactory(ipListConfig, metricsFacade);
     }
 

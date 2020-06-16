@@ -16,11 +16,7 @@ spring:
     allow-circular-references: true
     allow-bean-definition-overriding: true
   profiles:
-<<<<<<< HEAD
-    include: example-route
-=======
     include: example-route,example-discovery
->>>>>>> 6ddba0b... FIX: optimization and suchs configurations
     active: dev
   freemarker:
     checkTemplateLocation: false
