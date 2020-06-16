@@ -15,13 +15,13 @@
  */
 package org.springcloud.gateway.core.commons.entrypoint;
 
-import static org.springcloud.gateway.core.lang.Assert2.notNullOf;
-import static org.springcloud.gateway.core.lang.FastTimeClock.currentTimeMillis;
 import static java.lang.String.format;
 import static java.util.Collections.singletonMap;
 import static java.util.Collections.unmodifiableList;
 import static java.util.Objects.isNull;
 import static org.apache.commons.lang3.SystemUtils.LINE_SEPARATOR;
+import static org.springcloud.gateway.core.lang.Assert2.notNullOf;
+import static org.springcloud.gateway.core.lang.FastTimeClock.currentTimeMillis;
 import static org.springframework.http.MediaType.APPLICATION_ATOM_XML;
 import static org.springframework.http.MediaType.APPLICATION_CBOR;
 import static org.springframework.http.MediaType.APPLICATION_FORM_URLENCODED;
@@ -39,6 +39,15 @@ import java.util.Map;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
+import org.springcloud.gateway.core.commons.entrypoint.config.LoggingProperties;
+import org.springcloud.gateway.core.commons.fault.IamGatewayFault.SafeFilterOrdered;
+import org.springcloud.gateway.core.constant.CoreInfraConstants;
+import org.springcloud.gateway.core.lang.TypeConverts;
+import org.springcloud.gateway.core.logging.LoggingMessageUtil;
+import org.springcloud.gateway.core.logging.reactive.BaseLoggingWebFilter;
+import org.springcloud.gateway.core.utils.web.ReactiveRequestExtractor;
+import org.springcloud.gateway.core.web.WebUtils.WebRequestExtractor;
+import org.springcloud.gateway.core.web.matcher.SpelRequestMatcher;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.cloud.gateway.route.Route;
@@ -52,23 +61,14 @@ import org.springframework.web.server.ServerWebExchange;
 
 import com.google.common.base.Predicates;
 
-import org.springcloud.gateway.core.commons.entrypoint.config.LoggingProperties;
-import org.springcloud.gateway.core.commons.fault.IamGatewayFault.SafeFilterOrdered;
-import org.springcloud.gateway.core.lang.TypeConverts;
-import org.springcloud.gateway.core.web.WebUtils.WebRequestExtractor;
-import org.springcloud.gateway.core.constant.CoreInfraConstants;
-import org.springcloud.gateway.core.logging.LoggingMessageUtil;
-import org.springcloud.gateway.core.logging.reactive.BaseLoggingWebFilter;
-import org.springcloud.gateway.core.utils.web.ReactiveRequestExtractor;
-import org.springcloud.gateway.core.web.matcher.SpelRequestMatcher;
-
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 
 /**
  * {@link EntrypointBaseGlobalFilter}
  * 
- * @author springcloudgateway &lt;springcloudgateway@163.com, springcloudgateway@163.com&gt;
+ * @author springcloudgateway &lt;springcloudgateway@163.com,
+ *         springcloudgateway@163.com&gt;
  * @version v1.0.0
  * @since v3.0.0
  */
@@ -161,14 +161,14 @@ public abstract class EntrypointBaseGlobalFilter implements GlobalFilter, Ordere
         try {
             // Check if printing the log of the current request is enabled based
             // on the current request parameters.
-            return requestMatcher.matches(new ReactiveRequestExtractor(exchange.getRequest()),
-                    loggingConfig.getPreferOpenMatchExpression(), routeIdPredicateSupplier)
-                    || (determineRequestVerboseLevel(exchange) >= 10
+            return (requestMatcher.matches(new ReactiveRequestExtractor(exchange.getRequest()),
+                    loggingConfig.getPreferOpenMatchExpression(), routeIdPredicateSupplier))
+                    || (determineRequestVerboseLevel(exchange) > 10
                             && requestMatcher.matches(new ReactiveRequestExtractor(exchange.getRequest()),
                                     exchange.getRequest().getHeaders().getFirst(loggingConfig.getDyeingLogStateRequestHeader()),
                                     routeIdPredicateSupplier));
         } catch (Exception e) {
-            log.warn("Evaluating failed, logging disabled by default, reason: %s", e.getMessage());
+            log.debug("Evaluating failed, logging disabled by default, reason: %s", e.getMessage());
             return false;
         }
     }

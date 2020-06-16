@@ -24,7 +24,7 @@ import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
 
-import org.springcloud.gateway.core.common.constant.GatewayIAMConstants;
+import org.springcloud.gateway.core.common.constant.GatewayMAIConstants;
 import org.springcloud.gateway.core.commons.boostrap.config.IamSecurityAutoConfiguration;
 import org.springcloud.gateway.core.commons.zookeeper.Https2HttpGlobalFilter;
 import org.springcloud.gateway.core.commons.zookeeper.RefreshRouteApplicationListener;
@@ -41,7 +41,7 @@ import org.springcloud.gateway.core.commons.zookeeper.repository.RedisRouteDefin
 public class RouteAutoConfiguration {
 
     @Bean
-    @ConfigurationProperties(prefix = GatewayIAMConstants.CONF_PREFIX_IAM_GATEWAY_ROUTE)
+    @ConfigurationProperties(prefix = GatewayMAIConstants.CONF_PREFIX_SCG_GATEWAY_ROUTE)
     public RouteProperties routeProperties() {
         return new RouteProperties();
     }

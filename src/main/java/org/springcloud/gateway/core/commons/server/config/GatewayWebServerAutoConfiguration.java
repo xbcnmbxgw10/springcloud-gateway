@@ -15,7 +15,7 @@
  */
 package org.springcloud.gateway.core.commons.server.config;
 
-import static org.springcloud.gateway.core.common.constant.GatewayIAMConstants.CONF_PREFIX_IAM_GATEWAY_SERVER;
+import static org.springcloud.gateway.core.common.constant.GatewayMAIConstants.CONF_PREFIX_SCG_GATEWAY_SERVER;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -36,7 +36,7 @@ import org.springcloud.gateway.core.commons.server.SecureNettyReactiveWebServerF
 public class GatewayWebServerAutoConfiguration {
 
     @Bean
-    @ConfigurationProperties(prefix = CONF_PREFIX_IAM_GATEWAY_SERVER)
+    @ConfigurationProperties(prefix = CONF_PREFIX_SCG_GATEWAY_SERVER)
     public GatewayWebServerProperties gatewayWebServerProperties() {
         return new GatewayWebServerProperties();
     }

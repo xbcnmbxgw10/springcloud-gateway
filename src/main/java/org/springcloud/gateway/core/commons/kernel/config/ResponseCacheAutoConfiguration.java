@@ -18,7 +18,7 @@ package org.springcloud.gateway.core.commons.kernel.config;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 
-import org.springcloud.gateway.core.common.constant.GatewayIAMConstants;
+import org.springcloud.gateway.core.common.constant.GatewayMAIConstants;
 import org.springcloud.gateway.core.commons.config.ReactiveByteArrayRedisTemplate;
 import org.springcloud.gateway.core.commons.kernel.KernelCacheFilterFactory;
 import org.springcloud.gateway.core.commons.microtag.GatewayMetricsFacade;
@@ -33,7 +33,7 @@ import org.springcloud.gateway.core.commons.microtag.GatewayMetricsFacade;
 public class ResponseCacheAutoConfiguration {
 
     @Bean
-    @ConfigurationProperties(prefix = GatewayIAMConstants.CONF_PREFIX_IAM_GATEWAY_RESPONSECACHE)
+    @ConfigurationProperties(prefix = GatewayMAIConstants.CONF_PREFIX_SCG_GATEWAY_RESPONSECACHE)
     public ResponseCacheProperties responseCacheProperties() {
         return new ResponseCacheProperties();
     }

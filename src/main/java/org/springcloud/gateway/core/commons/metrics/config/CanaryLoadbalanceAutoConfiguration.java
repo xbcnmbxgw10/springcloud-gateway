@@ -15,7 +15,7 @@
  */
 package org.springcloud.gateway.core.commons.metrics.config;
 
-import static org.springcloud.gateway.core.common.constant.GatewayIAMConstants.CONF_PREFIX_IAM_GATEWAY_LOADBANANER;
+import static org.springcloud.gateway.core.common.constant.GatewayMAIConstants.CONF_PREFIX_SCG_GATEWAY_LOADBANANER;
 
 import java.util.List;
 
@@ -59,7 +59,7 @@ import io.prometheus.client.CollectorRegistry;
 public class CanaryLoadbalanceAutoConfiguration {
 
     @Bean
-    @ConfigurationProperties(prefix = CONF_PREFIX_IAM_GATEWAY_LOADBANANER)
+    @ConfigurationProperties(prefix = CONF_PREFIX_SCG_GATEWAY_LOADBANANER)
     public CanaryLoadBalancerProperties canaryLoadBalancerProperties() {
         return new CanaryLoadBalancerProperties();
     }

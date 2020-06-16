@@ -34,7 +34,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.data.redis.core.ReactiveStringRedisTemplate;
 import org.springframework.data.redis.core.script.RedisScript;
 
-import org.springcloud.gateway.core.common.constant.GatewayIAMConstants;
+import org.springcloud.gateway.core.common.constant.GatewayMAIConstants;
 import org.springcloud.gateway.core.commons.microtag.GatewayMetricsFacade;
 import org.springcloud.gateway.core.commons.model.IamRequestLimiterFilterFactory;
 import org.springcloud.gateway.core.commons.model.configurer.LimiterStrategyConfigurer;
@@ -74,7 +74,7 @@ public class IamRequestLimiterAutoConfiguration {
     //
 
     @Bean
-    @ConfigurationProperties(prefix = GatewayIAMConstants.CONF_PREFIX_IAM_GATEWAY_REQUESTLIMIT)
+    @ConfigurationProperties(prefix = GatewayMAIConstants.CONF_PREFIX_SCG_GATEWAY_REQUESTLIMIT)
     public IamRequestLimiterProperties iamRequestLimiterProperties() {
         return new IamRequestLimiterProperties();
     }

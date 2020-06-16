@@ -15,13 +15,13 @@
  */
 package org.springcloud.gateway.core.commons.model.config;
 
-import static org.springcloud.gateway.core.common.constant.GatewayIAMConstants.CACHE_PREFIX_IAM_GWTEWAY_REQUESTLIMIT_CONF_QUOTA;
-import static org.springcloud.gateway.core.common.constant.GatewayIAMConstants.CACHE_PREFIX_IAM_GWTEWAY_REQUESTLIMIT_CONF_RATE;
-import static org.springcloud.gateway.core.common.constant.GatewayIAMConstants.CACHE_PREFIX_IAM_GWTEWAY_REQUESTLIMIT_EVENT_HITS_RATE;
-import static org.springcloud.gateway.core.common.constant.GatewayIAMConstants.CACHE_PREFIX_IAM_GWTEWAY_REQUESTLIMIT_EVENT_HITS_QUOTA;
-import static org.springcloud.gateway.core.common.constant.GatewayIAMConstants.CACHE_PREFIX_IAM_GWTEWAY_REQUESTLIMIT_TOKEN_QUOTA;
-import static org.springcloud.gateway.core.common.constant.GatewayIAMConstants.CACHE_PREFIX_IAM_GWTEWAY_REQUESTLIMIT_TOKEN_RATE;
-import static org.springcloud.gateway.core.common.constant.GatewayIAMConstants.CACHE_SUFFIX_IAM_GATEWAY_EVENT_YYMMDD;
+import static org.springcloud.gateway.core.common.constant.GatewayMAIConstants.CACHE_PREFIX_SCG_GWTEWAY_REQUESTLIMIT_CONF_QUOTA;
+import static org.springcloud.gateway.core.common.constant.GatewayMAIConstants.CACHE_PREFIX_SCG_GWTEWAY_REQUESTLIMIT_CONF_RATE;
+import static org.springcloud.gateway.core.common.constant.GatewayMAIConstants.CACHE_PREFIX_SCG_GWTEWAY_REQUESTLIMIT_EVENT_HITS_RATE;
+import static org.springcloud.gateway.core.common.constant.GatewayMAIConstants.CACHE_PREFIX_SCG_GWTEWAY_REQUESTLIMIT_EVENT_HITS_QUOTA;
+import static org.springcloud.gateway.core.common.constant.GatewayMAIConstants.CACHE_PREFIX_SCG_GWTEWAY_REQUESTLIMIT_TOKEN_QUOTA;
+import static org.springcloud.gateway.core.common.constant.GatewayMAIConstants.CACHE_PREFIX_SCG_GWTEWAY_REQUESTLIMIT_TOKEN_RATE;
+import static org.springcloud.gateway.core.common.constant.GatewayMAIConstants.CACHE_SUFFIX_IAM_GATEWAY_EVENT_YYMMDD;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
@@ -185,13 +185,13 @@ public class IamRequestLimiterProperties {
             /**
              * Redis tokens rate limiter user-level configuration key prefix.
              */
-            private String configPrefix = CACHE_PREFIX_IAM_GWTEWAY_REQUESTLIMIT_CONF_RATE;
+            private String configPrefix = CACHE_PREFIX_SCG_GWTEWAY_REQUESTLIMIT_CONF_RATE;
 
             /**
              * Redis tokens rate limiter user-level token computational key
              * prefix.
              */
-            private String tokenPrefix = CACHE_PREFIX_IAM_GWTEWAY_REQUESTLIMIT_TOKEN_RATE;
+            private String tokenPrefix = CACHE_PREFIX_SCG_GWTEWAY_REQUESTLIMIT_TOKEN_RATE;
 
             /**
              * The name of the header that returns the burst capacity
@@ -267,12 +267,12 @@ public class IamRequestLimiterProperties {
             /**
              * The quota limiter user-level configuration key prefix.
              */
-            private String configPrefix = CACHE_PREFIX_IAM_GWTEWAY_REQUESTLIMIT_CONF_QUOTA;
+            private String configPrefix = CACHE_PREFIX_SCG_GWTEWAY_REQUESTLIMIT_CONF_QUOTA;
 
             /**
              * The quota limiter user-level tokens computational key prefix.
              */
-            private String tokenPrefix = CACHE_PREFIX_IAM_GWTEWAY_REQUESTLIMIT_TOKEN_QUOTA;
+            private String tokenPrefix = CACHE_PREFIX_SCG_GWTEWAY_REQUESTLIMIT_TOKEN_QUOTA;
 
             /**
              * The name of the header that returns the request capacity
@@ -367,12 +367,12 @@ public class IamRequestLimiterProperties {
             /**
              * Event logging key prefix for redis based rate limiter
              */
-            private String rateHitsCumulatorPrefix = CACHE_PREFIX_IAM_GWTEWAY_REQUESTLIMIT_EVENT_HITS_RATE;
+            private String rateHitsCumulatorPrefix = CACHE_PREFIX_SCG_GWTEWAY_REQUESTLIMIT_EVENT_HITS_RATE;
 
             /**
              * Event logging key prefix for redis based quota limiter
              */
-            private String quotaHitsCumulatorPrefix = CACHE_PREFIX_IAM_GWTEWAY_REQUESTLIMIT_EVENT_HITS_QUOTA;
+            private String quotaHitsCumulatorPrefix = CACHE_PREFIX_SCG_GWTEWAY_REQUESTLIMIT_EVENT_HITS_QUOTA;
 
             /**
              * Redis event recorder recorder accumulator suffix of date format

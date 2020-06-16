@@ -24,7 +24,7 @@ import org.springframework.cloud.client.circuitbreaker.ReactiveCircuitBreakerFac
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.reactive.DispatcherHandler;
 
-import org.springcloud.gateway.core.common.constant.GatewayIAMConstants;
+import org.springcloud.gateway.core.common.constant.GatewayMAIConstants;
 import org.springcloud.gateway.core.commons.handler.DefaultCircuitBreakerCustomizer;
 import org.springcloud.gateway.core.commons.handler.IamSpringCloudCircuitBreakerResilience4JFilterFactory;
 
@@ -40,7 +40,7 @@ import org.springcloud.gateway.core.commons.handler.IamSpringCloudCircuitBreaker
 public class CBAutoConfiguration {
 
     @Bean
-    @ConfigurationProperties(prefix = GatewayIAMConstants.CONF_PREFIX_IAM_GATEWAY_CIRCUITBREAKER)
+    @ConfigurationProperties(prefix = GatewayMAIConstants.CONF_PREFIX_SCG_GATEWAY_CIRCUITBREAKER)
     public CBProperties cBProperties() {
         return new CBProperties();
     }

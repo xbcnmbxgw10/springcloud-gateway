@@ -15,9 +15,9 @@
  */
 package org.springcloud.gateway.core.commons.serv;
 
-import static org.springcloud.gateway.core.reflect.ReflectionUtils2.findField;
-import static org.springcloud.gateway.core.reflect.ReflectionUtils2.getField;
 import static java.util.Objects.isNull;
+import static org.springcloud.gateway.core.core.ReflectionUtils2.findField;
+import static org.springcloud.gateway.core.core.ReflectionUtils2.getField;
 
 import java.lang.reflect.Field;
 

@@ -30,6 +30,9 @@ import java.util.Map;
 import javax.annotation.Nullable;
 import javax.validation.constraints.NotNull;
 
+import org.springcloud.gateway.core.core.ResolvableType;
+import org.springcloud.gateway.core.core.TypeUtils2;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -41,8 +44,6 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.datatype.jsr310.JSR310Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import org.springcloud.gateway.core.reflect.ResolvableType;
-import org.springcloud.gateway.core.reflect.TypeUtils2;
 
 /**
  * JACKSON utility tools.

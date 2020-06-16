@@ -15,13 +15,13 @@
  */
 package org.springcloud.gateway.core.bean;
 
+import static org.springcloud.gateway.core.core.ReflectionUtils2.findField;
+import static org.springcloud.gateway.core.core.ReflectionUtils2.isCompatibleType;
+import static org.springcloud.gateway.core.core.ReflectionUtils2.isGenericModifier;
+import static org.springcloud.gateway.core.core.ReflectionUtils2.makeAccessible;
+import static org.springcloud.gateway.core.core.TypeUtils2.isSimpleCollectionType;
+import static org.springcloud.gateway.core.core.TypeUtils2.isSimpleType;
 import static org.springcloud.gateway.core.lang.ClassUtils2.anyTypeOf;
-import static org.springcloud.gateway.core.reflect.ReflectionUtils2.findField;
-import static org.springcloud.gateway.core.reflect.ReflectionUtils2.isCompatibleType;
-import static org.springcloud.gateway.core.reflect.ReflectionUtils2.isGenericModifier;
-import static org.springcloud.gateway.core.reflect.ReflectionUtils2.makeAccessible;
-import static org.springcloud.gateway.core.reflect.TypeUtils2.isSimpleCollectionType;
-import static org.springcloud.gateway.core.reflect.TypeUtils2.isSimpleType;
 import static java.lang.String.format;
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
@@ -33,7 +33,7 @@ import java.lang.reflect.Modifier;
 import javax.annotation.Nullable;
 import javax.validation.constraints.NotNull;
 
-import org.springcloud.gateway.core.reflect.ReflectionUtils2.FieldFilter;
+import org.springcloud.gateway.core.core.ReflectionUtils2.FieldFilter;
 
 /**
  * Enhanced static convenience methods for JavaBeans: for instantiating beans,
@@ -236,7 +236,7 @@ public abstract class BeanUtils2 {
 
     /**
      * Default field filter of {@link FieldFilter}.
-     * @see:{@link org.springcloud.gateway.core.reflect.ReflectionUtils2#isGenericAccessibleModifier(int)}
+     * @see:{@link org.springcloud.gateway.core.core.ReflectionUtils2#isGenericAccessibleModifier(int)}
      */
     public static final FieldFilter DEFAULT_FIELD_FILTER = targetField -> isGenericModifier(targetField.getModifiers());
 

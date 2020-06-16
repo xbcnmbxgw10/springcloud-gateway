@@ -13,7 +13,15 @@
 spring:
   redis:
     cluster:
-      nodes: ${REDIS_NODES:redis:6379,redis:6380,redis:6381,redis:7379,redis:7380,redis:7381}
+<<<<<<< HEAD
+      nodes: ${REDIS_NODES:localhost:6379,localhost:6380,localhost:6381,localhost:7379,localhost:7380,localhost:7381}
+=======
+<<<<<<< HEAD
+      nodes: ${REDIS_NODES:10.0.0.114:6379,10.0.0.114:6380,10.0.0.114:6381,10.0.0.114:7379,10.0.0.114:7380,10.0.0.114:7381}
+=======
+      nodes: ${REDIS_NODES:localhost:6379,localhost:6380,localhost:6381,localhost:7379,localhost:7380,localhost:7381}
+>>>>>>> 6ddba0b... FIX: optimization and suchs configurations
+>>>>>>> 5b56972... FIX: YAML configurations should be packaged in and run in ide to be loaded?
     timeout: 10000ms
     password: ${REDIS_PASSWD:123456}
     lettuce:
@@ -21,10 +29,24 @@ spring:
         max-active: 10
         max-wait: -1ms
   cloud:
+    nacos:
+      config:
+        enabled: true
+        serverAddr: 127.0.0.1:8848
+        #username:
+        #password:
+        fileExtension: yml
+        name: ${spring.application.name}-route
+        group: DEFAULT_GROUP
+        timeout: 3000
+        maxRetry: 3
+        configLongPollTimeout: 30_000
+        namespace: ${spring.application.name}
+        clusterName: ${spring.application.name}
     discovery:
       client:
         # see:org.springframework.cloud.client.discovery.simple.SimpleDiscoveryClient
-        simple: # for testing
+        simple:
           instances:
             default-fallback-service:
               - instanceId: default-fallback-service

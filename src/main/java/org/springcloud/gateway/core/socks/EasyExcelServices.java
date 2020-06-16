@@ -34,8 +34,9 @@ import com.alibaba.excel.read.listener.ReadListener;
 import com.alibaba.excel.read.metadata.ReadSheet;
 import com.alibaba.excel.write.handler.CellWriteHandler;
 import com.alibaba.excel.write.metadata.WriteSheet;
+
+import org.springcloud.gateway.core.core.ResolvableType;
 import org.springcloud.gateway.core.log.SmartLogger;
-import org.springcloud.gateway.core.reflect.ResolvableType;
 
 /**
  * {@link EasyExcelServices}

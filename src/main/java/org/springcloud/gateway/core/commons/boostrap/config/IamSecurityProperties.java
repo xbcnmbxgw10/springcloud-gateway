@@ -1,10 +1,10 @@
 package org.springcloud.gateway.core.commons.boostrap.config;
 
-import static org.springcloud.gateway.core.common.constant.GatewayIAMConstants.CACHE_PREFIX_IAM_GWTEWAY_AUTH_SIGN_EVENT_FAILURE;
-import static org.springcloud.gateway.core.common.constant.GatewayIAMConstants.CACHE_PREFIX_IAM_GWTEWAY_AUTH_SIGN_EVENT_SUCCESS;
-import static org.springcloud.gateway.core.common.constant.GatewayIAMConstants.CACHE_PREFIX_IAM_GWTEWAY_AUTH_SIGN_REPLAY_BLOOM;
-import static org.springcloud.gateway.core.common.constant.GatewayIAMConstants.CACHE_PREFIX_IAM_GWTEWAY_AUTH_SIGN_SECRET;
-import static org.springcloud.gateway.core.common.constant.GatewayIAMConstants.CACHE_SUFFIX_IAM_GATEWAY_EVENT_YYMMDD;
+import static org.springcloud.gateway.core.common.constant.GatewayMAIConstants.CACHE_PREFIX_SCG_GWTEWAY_AUTH_SIGN_EVENT_FAILURE;
+import static org.springcloud.gateway.core.common.constant.GatewayMAIConstants.CACHE_PREFIX_SCG_GWTEWAY_AUTH_SIGN_EVENT_SUCCESS;
+import static org.springcloud.gateway.core.common.constant.GatewayMAIConstants.CACHE_PREFIX_SCG_GWTEWAY_AUTH_SIGN_REPLAY_BLOOM;
+import static org.springcloud.gateway.core.common.constant.GatewayMAIConstants.CACHE_PREFIX_SCG_GWTEWAY_AUTH_SIGN_SECRET;
+import static org.springcloud.gateway.core.common.constant.GatewayMAIConstants.CACHE_SUFFIX_IAM_GATEWAY_EVENT_YYMMDD;
 
 import org.springframework.validation.annotation.Validated;
 
@@ -41,7 +41,7 @@ public class IamSecurityProperties {
         /**
          * Prefix when loading from signing keys stored.
          */
-        private String secretStorePrefix = CACHE_PREFIX_IAM_GWTEWAY_AUTH_SIGN_SECRET;
+        private String secretStorePrefix = CACHE_PREFIX_SCG_GWTEWAY_AUTH_SIGN_SECRET;
 
         /**
          * Local cache expiration time for signing keys.
@@ -52,12 +52,12 @@ public class IamSecurityProperties {
          * Ignore authentication in JVM debug mode, often used for rapid
          * development and testing environments.
          */
-        private boolean anonymousAuthingWithJvmDebug = false;
+        private boolean anonymousAuthingWithJvmDebug = true;
 
         /**
          * Prefix when loading from bloom filter replay keys stored.
          */
-        private String signReplayVerifyBloomLoadPrefix = CACHE_PREFIX_IAM_GWTEWAY_AUTH_SIGN_REPLAY_BLOOM;
+        private String signReplayVerifyBloomLoadPrefix = CACHE_PREFIX_SCG_GWTEWAY_AUTH_SIGN_REPLAY_BLOOM;
 
         private EventRecorderProperties eventRecorder = new EventRecorderProperties();
     }
@@ -107,12 +107,12 @@ public class IamSecurityProperties {
         /**
          * Redis eventRecorder recorder success accumulator key.
          */
-        private String successCumulatorPrefix = CACHE_PREFIX_IAM_GWTEWAY_AUTH_SIGN_EVENT_SUCCESS;
+        private String successCumulatorPrefix = CACHE_PREFIX_SCG_GWTEWAY_AUTH_SIGN_EVENT_SUCCESS;
 
         /**
          * Redis eventRecorder recorder failure accumulator prefix.
          */
-        private String failureCumulatorPrefix = CACHE_PREFIX_IAM_GWTEWAY_AUTH_SIGN_EVENT_FAILURE;
+        private String failureCumulatorPrefix = CACHE_PREFIX_SCG_GWTEWAY_AUTH_SIGN_EVENT_FAILURE;
 
         /**
          * Redis eventRecorder recorder accumulator suffix of date format

@@ -31,8 +31,8 @@ import org.apache.commons.logging.LogFactory;
 
 import javax.annotation.Nullable;
 import org.springcloud.gateway.core.collection.CollectionUtils2;
+import org.springcloud.gateway.core.core.ParameterizedTypeReference;
 import org.springcloud.gateway.core.lang.ClassUtils2;
-import org.springcloud.gateway.core.reflect.ParameterizedTypeReference;
 import org.springcloud.gateway.core.remoting.exception.RestClientException;
 import org.springcloud.gateway.core.remoting.parse.AllEncompassingFormHttpMessageParser;
 import org.springcloud.gateway.core.remoting.parse.ByteArrayHttpMessageParser;

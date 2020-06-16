@@ -15,13 +15,8 @@
  */
 package org.springcloud.gateway.core.web.matcher;
 
-import static org.springcloud.gateway.core.collection.CollectionUtils2.safeList;
-import static org.springcloud.gateway.core.lang.Assert2.hasText;
-import static org.springcloud.gateway.core.lang.Assert2.hasTextOf;
-import static org.springcloud.gateway.core.lang.Assert2.isTrue;
-import static org.springcloud.gateway.core.lang.Assert2.notNull;
-import static org.springcloud.gateway.core.lang.Assert2.notNullOf;
 import static java.lang.String.format;
+import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.emptyMap;
 import static java.util.Collections.unmodifiableList;
@@ -38,6 +33,12 @@ import static org.apache.commons.lang3.StringUtils.equalsIgnoreCase;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.startsWith;
 import static org.apache.commons.lang3.StringUtils.trimToEmpty;
+import static org.springcloud.gateway.core.collection.CollectionUtils2.safeList;
+import static org.springcloud.gateway.core.lang.Assert2.hasText;
+import static org.springcloud.gateway.core.lang.Assert2.hasTextOf;
+import static org.springcloud.gateway.core.lang.Assert2.isTrue;
+import static org.springcloud.gateway.core.lang.Assert2.notNull;
+import static org.springcloud.gateway.core.lang.Assert2.notNullOf;
 import static org.springframework.util.CollectionUtils.isEmpty;
 
 import java.util.List;
@@ -51,11 +52,25 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springcloud.gateway.core.bean2.BeanCopierUtils;
+import org.springcloud.gateway.core.bean2.BeanMapConvert;
+import org.springcloud.gateway.core.io.ByteStreamUtils;
+import org.springcloud.gateway.core.kit.ProcessUtils;
+import org.springcloud.gateway.core.math.Maths;
+import org.springcloud.gateway.core.nlp.PingyUtils;
+import org.springcloud.gateway.core.resource.ResourceUtils2;
+import org.springcloud.gateway.core.socks.EasyExcelServices;
+import org.springcloud.gateway.core.tools.JvmRuntimeTool;
+import org.springcloud.gateway.core.utils.AopUtils2;
+import org.springcloud.gateway.core.utils.PropertySources;
+import org.springcloud.gateway.core.utils.expression.SpelExpressions;
+import org.springcloud.gateway.core.utils.image.PixelUtils;
+import org.springcloud.gateway.core.utils.web.WebUtils3;
+import org.springcloud.gateway.core.validation.BindingResultUtils2;
+import org.springcloud.gateway.core.view.Freemarkers;
+import org.springcloud.gateway.core.web.WebUtils.WebRequestExtractor;
 import org.springframework.expression.EvaluationException;
 import org.springframework.util.AntPathMatcher;
-
-import org.springcloud.gateway.core.web.WebUtils.WebRequestExtractor;
-import org.springcloud.gateway.core.utils.expression.SpelExpressions;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -74,11 +89,12 @@ import lombok.extern.slf4j.Slf4j;
  * @version v1.0.0
  * @since v3.0.0
  */
+@SuppressWarnings("deprecation")
 @Getter
 @Slf4j
 public class SpelRequestMatcher {
 
-    private @NotBlank final SpelExpressions spel = SpelExpressions.create();
+    private @NotBlank static SpelExpressions SPEL;
     private @Nullable final List<MatchHttpRequestRule> ruleDefinitions;
     private @Nullable final Map<String, Supplier<Predicate<String>>> defaultExtraPredicateSupplierVariables;
 
@@ -176,7 +192,7 @@ public class SpelRequestMatcher {
         // do request matching.
         List<MatchHttpRequestRule> result = ruleDefinitions.stream().filter(e -> {
             model.put("$".concat(SPEL_KEYWORDS_RULE), e);
-            return spel.resolve(expression, model);
+            return SPEL.resolve(expression, model);
         }).collect(toList());
 
         return unmodifiableList(result);
@@ -246,7 +262,7 @@ public class SpelRequestMatcher {
         }
 
         try {
-            return spel.resolve(expression, model);
+            return SPEL.resolve(expression, model);
         } catch (EvaluationException e) {
             String errmsg = format("Cannot evaluate expression: '%s'", expression);
             log.error(errmsg, e);
@@ -479,5 +495,12 @@ public class SpelRequestMatcher {
     public static final String SPEL_KEYWORDS_REQUEST = "request";
     public static final String SPEL_KEYWORDS_RULES = "rules";
     public static final String SPEL_KEYWORDS_RULE = "rule";
+    public static final List<Class<?>> SPEL_KEYWORDS_CLASS_BUILDIN = asList(Maths.class, PingyUtils.class, AopUtils2.class,
+            PropertySources.class, ProcessUtils.class, BeanCopierUtils.class, BeanMapConvert.class, WebUtils3.class,
+            PixelUtils.class, Freemarkers.class, BindingResultUtils2.class, ResourceUtils2.class, EasyExcelServices.class,
+            JvmRuntimeTool.class, ByteStreamUtils.class);
+    static {
+        SPEL = SpelExpressions.create(SPEL_KEYWORDS_CLASS_BUILDIN.toArray(new Class[0]));
+    }
 
 }

@@ -26,8 +26,8 @@ import org.apache.commons.cli.Options;
 import org.springcloud.gateway.core.kit.annotation.PropertyDescription;
 
 import static com.google.common.base.Charsets.UTF_8;
+import static org.springcloud.gateway.core.core.TypeUtils2.isSimpleType;
 import static org.springcloud.gateway.core.lang.Assert2.*;
-import static org.springcloud.gateway.core.reflect.TypeUtils2.isSimpleType;
 import static org.apache.commons.lang3.StringUtils.*;
 
 /**

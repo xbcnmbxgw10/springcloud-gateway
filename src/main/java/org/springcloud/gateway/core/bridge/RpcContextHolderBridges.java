@@ -19,11 +19,11 @@
  */
 package org.springcloud.gateway.core.bridge;
 
+import static org.springcloud.gateway.core.core.ReflectionUtils2.findMethodNullable;
+import static org.springcloud.gateway.core.core.ReflectionUtils2.invokeMethod;
+import static org.springcloud.gateway.core.core.ReflectionUtils2.makeAccessible;
 import static org.springcloud.gateway.core.lang.Assert2.notNullOf;
 import static org.springcloud.gateway.core.lang.ClassUtils2.resolveClassNameNullable;
-import static org.springcloud.gateway.core.reflect.ReflectionUtils2.findMethodNullable;
-import static org.springcloud.gateway.core.reflect.ReflectionUtils2.invokeMethod;
-import static org.springcloud.gateway.core.reflect.ReflectionUtils2.makeAccessible;
 import static java.util.Objects.nonNull;
 
 import java.lang.reflect.Constructor;
